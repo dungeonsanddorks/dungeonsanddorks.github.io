@@ -1,0 +1,10 @@
+{
+	"manifest_version": 2,
+	"default_locale": "en",
+	"name": "Dungeons and Dorks",
+	"short_name": "Dungeons and Dorks",
+	"description": "Welcome to Dungeons and Dorks, your gateway to the enchanting world of Dungeons & Dragons. We’re passionate D&D enthusiasts, and our mission is to share the magic of this beloved tabletop RPG with you.",
+	"start_url": "index.html",
+	"background_color": "#5d825f",
+	"theme_color": "#5d825f"
+}
