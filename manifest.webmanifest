@@ -4,7 +4,20 @@
 	"name": "Dungeons and Dorks",
 	"short_name": "Dungeons and Dorks",
 	"description": "Welcome to Dungeons and Dorks, your gateway to the enchanting world of Dungeons & Dragons. We’re passionate D&D enthusiasts, and our mission is to share the magic of this beloved tabletop RPG with you.",
+	"icons": [
+		{
+			"src": "/android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
 	"start_url": "index.html",
 	"background_color": "#5d825f",
-	"theme_color": "#5d825f"
+	"theme_color": "#5d825f",
+	"display":"standalone"
 }
