@@ -8,7 +8,7 @@
 			<api name="Movable Type" blogID="1" preferred="false" apiLink="https://dungeonsanddorks.ca/xmlrpc.php" />
 			<api name="MetaWeblog" blogID="1" preferred="false" apiLink="https://dungeonsanddorks.ca/xmlrpc.php" />
 			<api name="Blogger" blogID="1" preferred="false" apiLink="https://dungeonsanddorks.ca/xmlrpc.php" /> -->
-			<api name="WP-API" blogID="1" preferred="true" apiLink="https://raw.githubusercontent.com/dungeonsanddorks/main/data/REST-api/REST-api.json" />
+			<api name="WP-API" blogID="1" preferred="true" apiLink="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/data/REST-api/REST-api.json" />
 		</apis>
 	</service>
 </rsd>
