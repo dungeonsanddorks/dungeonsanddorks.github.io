@@ -1,0 +1,214 @@
+.elementor-764 .elementor-element.elementor-element-6d79bcc>.elementor-container {
+	max-width: 800px;
+}
+
+.elementor-764 .elementor-element.elementor-element-6d79bcc:not(.elementor-motion-effects-element-type-background),
+.elementor-764 .elementor-element.elementor-element-6d79bcc>.elementor-motion-effects-container>.elementor-motion-effects-layer {
+	background-image: url("https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/wp-content/uploads/2023/10/portal-4960440_640.jpg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.elementor-764 .elementor-element.elementor-element-6d79bcc>.elementor-background-overlay {
+	background-color: var(--e-global-color-astglobalcolor2);
+	opacity: 0;
+	transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+}
+
+.elementor-764 .elementor-element.elementor-element-6d79bcc {
+	transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+	padding: 230px 0px 400px 0px;
+}
+
+.elementor-764 .elementor-element.elementor-element-23fba54 {
+	text-align: center;
+}
+
+.elementor-764 .elementor-element.elementor-element-23fba54 .elementor-heading-title {
+	color: var(--e-global-color-astglobalcolor5);
+	font-family: "Bangers", Sans-serif;
+	letter-spacing: 4px;
+}
+
+.elementor-764 .elementor-element.elementor-element-23fba54>.elementor-widget-container {
+	padding: 0px 0px 0px 0px;
+}
+
+.elementor-764 .elementor-element.elementor-element-05a4e80 {
+	--display: flex;
+	--flex-direction: column;
+	--container-widget-width: 100%;
+	--container-widget-height: initial;
+	--container-widget-flex-grow: 0;
+	--container-widget-align-self: initial;
+	--background-transition: 0.3s;
+}
+
+.elementor-764 .elementor-element.elementor-element-05a4e80:hover::before,
+.elementor-764 .elementor-element.elementor-element-05a4e80:hover>.elementor-background-video-container::before,
+.elementor-764 .elementor-element.elementor-element-05a4e80:hover>.e-con-inner>.elementor-background-video-container::before,
+.elementor-764 .elementor-element.elementor-element-05a4e80>.elementor-background-slideshow:hover::before,
+.elementor-764 .elementor-element.elementor-element-05a4e80>.e-con-inner>.elementor-background-slideshow:hover::before {
+	--background-overlay: '';
+}
+
+.elementor-764 .elementor-element.elementor-element-05a4e80:hover {
+	--overlay-opacity: 0.5;
+}
+
+.elementor-764 .elementor-element.elementor-element-727fd8e {
+	font-family: "Bangers", Sans-serif;
+	font-size: 17px;
+	font-weight: 400;
+}
+
+.elementor-764 .elementor-element.elementor-element-2a7a68f {
+	--display: flex;
+	--flex-direction: column;
+	--container-widget-width: 100%;
+	--container-widget-height: initial;
+	--container-widget-flex-grow: 0;
+	--container-widget-align-self: initial;
+	--background-transition: 0.3s;
+	--margin-block-start: 50px;
+	--margin-block-end: 0px;
+	--margin-inline-start: 0px;
+	--margin-inline-end: 0px;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .uc_post_list_box {
+	flex-direction: row;
+	background-color: #efefef;
+	border-style: solid;
+	border-width: 0px 0px 01px 0px;
+	padding: 0px 0px 050px 0px;
+	border-radius: 0px;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .uc_post_list {
+	grid-template-columns: repeat(1, 1fr);
+	gap: 50px;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .uc_post_list_content {
+	padding: 25px 25px 25px 25px;
+	justify-content: center;
+	text-align: left;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .uc_post_list_image {
+	width: 200px;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .uc_post_list_image img {
+	height: 250px;
+	border-radius: 30px;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .uc_post_list_image img {
+	object-position: center center;
+	object-fit: cover;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .ue-grid-item-category a {
+	background-color: #00bcff;
+	color: #ffffff;
+	padding: 2px 10px 2px 10px;
+	border-radius: 5px 5px 5px 5px;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .uc_post_list_title a {
+	color: #000000;
+	font-family: "Bangers", Sans-serif;
+	font-size: 32px;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .uc_post_list_title {
+	margin-top: 0px;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .ue-grid-item-meta-data {
+	color: #707070;
+	gap: 5px;
+	width: auto;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .ue-grid-item-meta-data svg {
+	fill: #707070;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .ue-meta-data {
+	margin-top: 0px;
+	gap: 10px;
+	justify-content: flex-start;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .uc_post_content {
+	color: #969696;
+	margin-top: 10px;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .uc_more_btn {
+	padding: 10px 20px 10px 20px;
+	display: inline-block;
+	border-radius: 0px;
+	background-color: #000000;
+	color: #ffffff;
+}
+
+.elementor-764 .elementor-element.elementor-element-919c7ef .ue-no-posts-found {
+	color: #000000;
+	background-color: #e8e8e8;
+	padding: 20px 20px 20px 20px;
+	border-style: solid;
+	border-width: 1px 1px 1px 1px;
+	border-color: #c4c4c4;
+}
+
+.elementor-764 .elementor-element.elementor-element-42b5ec0 {
+	--display: flex;
+	--background-transition: 0.3s;
+}
+
+.elementor-764 .elementor-element.elementor-element-cae63cb .archive_pagination {
+	border-radius: 0px;
+}
+
+.elementor-764 .elementor-element.elementor-element-cae63cb .page-numbers {
+	min-width: 30px;
+	height: 30px;
+	border-radius: 20px;
+}
+
+.elementor-764 .elementor-element.elementor-element-cae63cb>.elementor-widget-container {
+	margin: 050px 0px 075px 0px;
+}
+
+@media(min-width:1025px) {
+
+	.elementor-764 .elementor-element.elementor-element-6d79bcc:not(.elementor-motion-effects-element-type-background),
+	.elementor-764 .elementor-element.elementor-element-6d79bcc>.elementor-motion-effects-container>.elementor-motion-effects-layer {
+		background-attachment: scroll;
+	}
+}
+
+@media(max-width:1024px) {
+	.elementor-764 .elementor-element.elementor-element-6d79bcc {
+		padding: 120px 0px 100px 0px;
+	}
+}
+
+@media(max-width:767px) {
+	.elementor-764 .elementor-element.elementor-element-6d79bcc {
+		padding: 120px 0px 60px 0px;
+	}
+
+	.elementor-764 .elementor-element.elementor-element-23fba54>.elementor-widget-container {
+		margin: -10px 0px 0px 0px;
+	}
+
+	.elementor-764 .elementor-element.elementor-element-919c7ef .uc_post_list_box {
+		flex-direction: column;
+	}
+}
