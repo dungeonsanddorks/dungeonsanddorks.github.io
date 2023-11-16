@@ -4,7 +4,7 @@ class Blog {
 	}
 
 	async loadPosts () {
-		this.postData = await fetch('post-data/posts.json').then(response => response.json())
+		this.postData = await fetch('/blog/post-data/posts.json').then(response => response.json())
 		this.posts = this.postData.posts
 		console.log(this.posts)
 	}
