@@ -39,7 +39,7 @@ class Blog {
 </div>
 `
 		});
-		document.getElementsByClassName("elementor-widget-ucaddon_post_list")[0].children[0].innerHTML += this.output;
+		document.getElementsByClassName("uc_post_list")[0].innerHTML += this.output;
 	}
 }
 
