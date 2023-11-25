@@ -42,7 +42,8 @@ class Blog {
 			});
 			document.getElementsByClassName("uc_post_list")[0].innerHTML += this.output;
 		} else if (document.getElementsByClassName("ue_post_blocks")?.length > 0) {
-			this.posts.forEach(post => {
+			for (var i = 0; i < 6; i++) {
+				let post = this.posts[i]
 				this.output += `<div class="ue_post_blocks_box">
 <div class="ue_post_blocks_image">
 			<a href="https://dungeonsanddorks.github.io/" style="display:block;">
@@ -66,7 +67,7 @@ class Blog {
 </div>
 </div>
 `
-			});
+			};
 			document.getElementsByClassName("ue_post_blocks")[0].innerHTML += this.output;
 		}
 	} 
