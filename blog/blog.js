@@ -11,9 +11,10 @@ class Blog {
 
 	setUpBlogPageList () {
 		this.output = "";
-		this.posts.forEach(post => {
-			let date = new Date(post.dateLastModified * 1000)
-			this.output += `<div class="uc_post_list_box">
+		if (document.getElementsByClassName("uc_post_list")) {
+			this.posts.forEach(post => {
+				let date = new Date(post.dateLastModified * 1000)
+				this.output += `<div class="uc_post_list_box">
 	<div class="uc_post_list_image">
 		<a href="https://dungeonsanddorks.github.io/" target="_self" title="${post.title}">
 			<img decoding="async" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/post-data/images/${post.image}" alt="${post.imageAlt}" width="768" height="576">
@@ -38,9 +39,37 @@ class Blog {
 	</div>
 </div>
 `
-		});
-		document.getElementsByClassName("uc_post_list")[0].innerHTML += this.output;
-	}
+			});
+			document.getElementsByClassName("uc_post_list")[0].innerHTML += this.output;
+		} else if (document.getElementsByClassName("ue_post_blocks")) {
+			this.posts.forEach(post => {
+				this.output += `<div class="ue_post_blocks_box">
+<div class="ue_post_blocks_image">
+			<a href="https://dungeonsanddorks.github.io/" style="display:block;">
+		<img decoding="async" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/post-data/images/${post.image}" alt="${post.imageAlt}" width="768" height="576"/>
+	</a>
+</div>
+<div class="ue_post_blocks_content">
+	<div class="ue_post_blocks_title">
+		<a href="https://dungeonsanddorks.github.io/">
+		${post.title}
+		</a>
+	</div>    
+	<div class="ue_post_blocks_text">
+	${post.exerpt}
+	</div>
+	<div class="ue_post_blocks_link">
+		<a href="https://dungeonsanddorks.github.io/">
+			Read More
+		</a>
+	</div>
+</div>
+</div>
+`
+			});
+			document.getElementsByClassName("ue_post_blocks")[0].innerHTML += this.output;
+		}
+	} 
 }
 
 const blog = new Blog
