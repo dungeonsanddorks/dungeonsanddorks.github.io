@@ -11,7 +11,7 @@ class Blog {
 
 	setUpBlogPageList () {
 		this.output = "";
-		if (document.getElementsByClassName("uc_post_list")) {
+		if (document.getElementsByClassName("uc_post_list")?.length > 0) {
 			this.posts.forEach(post => {
 				let date = new Date(post.dateLastModified * 1000)
 				this.output += `<div class="uc_post_list_box">
@@ -41,7 +41,7 @@ class Blog {
 `
 			});
 			document.getElementsByClassName("uc_post_list")[0].innerHTML += this.output;
-		} else if (document.getElementsByClassName("ue_post_blocks")) {
+		} else if (document.getElementsByClassName("ue_post_blocks")?.length > 0) {
 			this.posts.forEach(post => {
 				this.output += `<div class="ue_post_blocks_box">
 <div class="ue_post_blocks_image">
