@@ -42,7 +42,8 @@ class Blog {
 			});
 			document.getElementsByClassName("uc_post_list")[0].innerHTML += this.output;
 		} else if (document.getElementsByClassName("ue_post_blocks")?.length > 0) {
-			for (var i = 0; i < 6; i++) {
+			var runFor = this.posts.length < 6 ? this.posts.length : 6
+			for (var i = 0; i < runFor; i++) {
 				let post = this.posts[i]
 				this.output += `<div class="ue_post_blocks_box">
 <div class="ue_post_blocks_image">
