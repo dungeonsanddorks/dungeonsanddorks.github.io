@@ -1,6 +1,40 @@
 {
 	"posts": [
 		{
+			"title": "A Little Humor, Anyone? D&D Jokes To Make You Laugh",
+			"id": 9,
+			"author": "Joe King",
+			"exerpt": "Welcome, brave adventurers and dungeon masters, to a realm where laughter reigns supreme and puns are...",
+			"dateFirstPublished": 1698149136,
+			"dateLastModified": 1698149136,
+			"entries": [
+				"Welcome, brave adventurers and dungeon masters, to a realm where laughter reigns supreme and puns are mightier than swords! In the world of Dungeons & Dragons, where dragons hoard gold, wizards cast spells, and bards serenade, we often forget that humor can be as powerful as a critical hit. Whether you're a seasoned veteran or a newbie rolling your first d20, prepare to embark on a quest for chuckles, as we delve into the whimsical and wacky side of D&D. Today we present to you 15 of the funniest D&D jokes that will bring a chuckle to even the most stoic of D&D players.",
+				{
+					"type": "list",
+					"typeOf": "o",
+					"classes": "has-medium-font-size",
+					"style": "line-height:2.5",
+					"entries": [
+						"What do you call a caster reincarnated as a canine? A labracadabrador!",
+						"If we were fighting an undead centaur, would we be beating a dead horse?",
+						"What time do elves like to have lunch? Twelvish.",
+						"Why are dwarves such good stone workers? Because they never take anything for granite.",
+						"What did the airship pirates name their vessel? The ethereal plane.",
+						"What do you need to roll to hit a kobold with a frying pan? A skillet check.",
+						"What did the Fighter say to the Ranger when they were sneaking by an Iguanodon? “Do you think he saurus?”",
+						"A Tree Blight covered in bacon jumps out of the forest at you. It's a ham-bush!",
+						"Beauty is in the eye of the beholder… Roll a Dexterity save, Beauty; it's firing a Disintegration Ray at you!",
+						"What causes a Lich's muscles to get sore after working out? Phy-lactic acid.",
+						"I made a set of plate armor and a helmet for my pet duck. It's nothing fancy, but it fits the bill.",
+						"Lance may be an uncommon name these days, but not that long ago, people were named Lance a lot.",
+						"What do you call a goblin in a sock? A hop-goblin.",
+						"How many elves does it take to light a candle? Just one. Turns out they are good for something!",
+						"The tavern band fired their half-elf drummer because she couldn't keep a beat. So they replaced her with a metro-gnome."
+					]
+				}
+			]
+		},
+		{
 			"title": "The Journey of Peren: From Scholar to Adventurer",
 			"id": 10,
 			"author": "Joe King",
@@ -9,9 +43,31 @@
 			"imageAlt": "create a wizard for your dungeons and dragons table top RPG",
 			"dateFirstPublished": 1698227670,
 			"dateLastModified": 1698227670,
-			"post": [
-				"TODO: Recursively Rendering (Like 5etools)",
-				"To be figured out later"
+			"entries": [
+				"Waterdeep, known as the City of Splendors, is a place of great diversity, teeming with people of all walks of life. In this bustling metropolis, where intrigue and mystery are as common as the flickering lamplights, a tale unfolds that showcases the transformation of a young, talented mage into a formidable adventurer. Peren Xilocient, hailing from a prosperous trading family, led a life marked by a remarkable affinity for magic that eventually catapulted him into an unexpected adventure, one that led to the formation of the renowned group, the Rusty Saw.",
+				{
+					"type": "h3",
+					"entries": [
+						"Early Years: The Magic Prodigy"
+					]
+				},
+				"Peren's story begins in the lap of luxury, born into a wealthy family in Waterdeep. His early years were marked by a gift that set him apart from his peers - an extraordinary aptitude for magic. Recognizing his unique talent, Peren's family spared no expense in providing him with the best magical education available. The halls of their family estate echoed with the incantations and spellcasting tutelage of personal tutors and teachers.",
+				"Peren, driven by an insatiable passion for magic, quickly rose to prominence within the magical community of Waterdeep. He soon found himself attending one of the city's prestigious schools of magic, where he further honed his mystical abilities. It was here that he first began to teach the arcane arts, sharing his wisdom with aspiring mages. Peren had carved a niche for himself in the world of academia, content with a life dedicated to the pursuit of knowledge and the understanding of magic.",
+				{
+					"type": "h3",
+					"entries": [
+						"A Twist of Fate: The Adventurer Awakens"
+					]
+				},
+				"Peren's life took an unexpected turn when he became entangled in a web of intrigue and conspiracy. Drawn into the intrigue alongside his close friends, he discovered that his magical talents were not limited to the halls of academia. As he followed a labyrinthine trail of clues through the intricate streets of Waterdeep, Peren and his companions played a pivotal role in unraveling a treacherous embezzlement scheme that had left the city in turmoil. This hoard of stolen gold had been amassed by a previous Lord of Waterdeep, and its recovery was chased by every faction in the city.",
+				{
+					"type": "h3",
+					"entries": [
+						"The Rusty Saw: Adventures Beneath the City"
+					]
+				},
+				"With this life-altering adventure, Peren realized that he could put his magical abilities to use beyond his scholarly pursuits. His close-knit group of friends, who had shared in the trials and tribulations of their earlier escapade, formed a bonded collective known as the Rusty Saw. Ready to improve their skills, the Rusty Saw delved deep into the treacherous Undermountain, where evil monsters lurked, and hidden treasures awaited discovery. Their quest for adventure led them on a relentless pursuit for experience and growth.",
+				"Peren's journey, from a young magic prodigy to a formidable adventurer of the Rusty Saw, is a testament to the unpredictable nature of life in Waterdeep. His experiences underscore the idea that sometimes, destiny has different plans for us than we could ever imagine. Peren's magical talents, once confined to the classroom, now shape the future of the City of Splendors, as he and his companions continue their relentless quest for adventure and knowledge, etching their names into the annals of Waterdeep's history."
 			]
 		},
 		{
@@ -23,9 +79,35 @@
 			"imageAlt": "Campaign maps and ideas.",
 			"dateFirstPublished": 1698406350,
 			"dateLastModified": 1698406350,
-			"post": [
-				"TODO: Recursively Rendering (Like 5etools)",
-				"To be figured out later"
+			"entries": [
+				"Are you ready to embark on an epic journey into the world of Dungeons and Dragons? Whether you're a seasoned adventurer or a curious newcomer, this blog post will provide you with valuable insights and tips to enhance your D&D experience. Plus, we'll explore how upcoming comic cons can be the perfect opportunity to act out your favorite characters. To find out more about events near you visit {@link FanCons.com|https://fancons.com/events/schedule.php?type=comic}",
+				"{@b Dungeons and Dragons (D&D):} A Brief Introduction",
+				"D&D is a tabletop role-playing game that has captured the hearts of gamers for decades. With its rich lore, imaginative storytelling, and boundless creativity, it offers an immersive experience like no other.",
+				"{@b Character Creation: Crafting the Perfect Hero}",
+				"In D&D, character creation is a pivotal aspect of the game. Players can choose from various races, classes, and backgrounds to design a character that suits their preferences. From elves and dwarves to wizards and rogues, the possibilities are endless.",
+				"For great resources to build the ultimate character see {@link Beyond D&D|https://www.dndbeyond.com/}",
+				"{@b The Art of Role-Playing}",
+				"D&D is all about immersing yourself in a character and playing the role to the hilt. As a player, you'll make choices, solve puzzles, and engage in epic battles, all while staying true to your character's personality and alignment.",
+				"{@b Dungeon Master (DM) Duties: Shaping the Adventure}",
+				"For those who prefer to guide the narrative, becoming a Dungeon Master (DM) is an exciting choice. The DM creates the world, weaves the story, and controls the NPCs, challenging the players and making the game come alive.",
+				"{@b The Power of Dice: Rolling for Success}",
+				"D&D relies heavily on dice rolls, with the iconic 20-sided die, or “d20,” taking center stage. Understanding the mechanics of dice rolling is crucial for determining the outcomes of your actions and battles.",
+				"For a free dice generator check out {@link dungeonsanddorks/dice-roller|https://dungeonsanddorks.github.io/dice-roller/}",
+				"{@b The Multiverse of D&D: Exploring Different Campaign Settings}",
+				"One of the beauties of D&D is the multitude of campaign settings available. Whether you want to explore the medieval fantasy of the Forgotten Realms, the dark and gothic world of Ravenloft, or the high-tech dystopia of Eberron, there's a setting for every taste.",
+				"{@b Leveling Up and Advancing Your Character}",
+				"As your character progresses, they gain experience points (XP) and levels, unlocking new abilities and powers. The journey from a novice adventurer to a legendary hero is an integral part of the D&D experience.",
+				"{@b Monsters and Creatures: The Challenges You'll Face}",
+				"D&D features a vast bestiary of creatures and monsters, from dragons to goblins. Understanding their strengths and weaknesses is vital for survival in the dungeons and wilderness.",
+				"{@b Role-Playing Resources: Books, Dice, and More}",
+				"To embark on your D&D adventure, you'll need essential resources like the Player's Handbook, Monster Manual, and Dungeon Master's Guide. Don't forget your dice set, character sheets, and a vivid imagination.",
+				"{@b Finding a D&D Community: Connecting with Fellow Adventurers}",
+				"D&D is not just a game; it's a community. Connect with fellow adventurers through local game stores, online forums, or social media groups to share experiences, tips, and stories.",
+				"{@b Upcoming Comicons: The Perfect Stage for D&D Enthusiasts}",
+				"If you're a passionate D&D player or Dungeon Master, you'll be delighted to know that upcoming comic conventions (comicons) are the perfect opportunities to showcase your love for the game. At these events, you can immerse yourself in the world of role-playing and bring your favorite characters to life.",
+				"Whether you want to dress up as a noble paladin, a mischievous rogue, or a powerful wizard, comicons provide a stage for you to express your creativity and passion for D&D. You can engage in D&D-themed cosplay, participate in tabletop games, and even attend panels and workshops to enhance your skills and knowledge.",
+				"{@b In Conclusion: Your D&D Journey Awaits}",
+				"Whether you're intrigued by the idea of creating a fearless dragon-slaying hero, a cunning rogue, or a wise and mysterious wizard, Dungeons and Dragons has something for everyone. Start your journey today, and uncover the limitless adventures that await you in the realms of D&D. And don't forget to mark your calendar for the next comicon - it might just be your chance to shine as your favorite D&D character."
 			]
 		}
 	]
