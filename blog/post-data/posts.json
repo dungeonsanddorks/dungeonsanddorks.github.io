@@ -2,6 +2,7 @@
 	"posts": [
 		{
 			"title": "Mastering Dungeons and Dragons: A Comprehensive Guide for Players and Dungeon Masters",
+			"id": 11,
 			"author": "Joe King",
 			"exerpt": "Are you ready to embark on an epic journey into the world of Dungeons and Dragons? Whether you're...",
 			"image": "dungeons-and-dragons-4413051_1280-1024x768.jpg",
@@ -15,6 +16,7 @@
 		},
 		{
 			"title": "The Journey of Peren: From Scholar to Adventurer",
+			"id": 10,
 			"author": "Joe King",
 			"exerpt": "Waterdeep, known as the City of Splendors, is a place of great diversity, teeming with people of all...",
 			"image": "wizard.webp",

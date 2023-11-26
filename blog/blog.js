@@ -16,14 +16,14 @@ class Blog {
 				let date = new Date(post.dateLastModified * 1000)
 				this.output += `<div class="uc_post_list_box">
 	<div class="uc_post_list_image">
-		<a href="https://dungeonsanddorks.github.io/" target="_self" title="${post.title}">
+		<a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}" target="_self" title="${post.title}">
 			<img decoding="async" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/post-data/images/${post.image}" alt="${post.imageAlt}" width="768" height="576">
 		</a>
 	</div>
 	<div class="uc_post_list_content">
 		<div class="uc_post_list_content_inside">
 			<div class="uc_post_list_title">
-				<a target="_self" href="https://dungeonsanddorks.github.io/" title="${post.title}">
+				<a target="_self" href="https://dungeonsanddorks.github.io/blog/?post=${post.id}" title="${post.title}">
 					${post.title}
 				</a>
 			</div>	
@@ -47,13 +47,13 @@ class Blog {
 				let post = this.posts[i]
 				this.output += `<div class="ue_post_blocks_box">
 <div class="ue_post_blocks_image">
-			<a href="https://dungeonsanddorks.github.io/" style="display:block;">
+			<a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}" style="display:block;">
 		<img decoding="async" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/post-data/images/${post.image}" alt="${post.imageAlt}" width="768" height="576"/>
 	</a>
 </div>
 <div class="ue_post_blocks_content">
 	<div class="ue_post_blocks_title">
-		<a href="https://dungeonsanddorks.github.io/">
+		<a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}">
 		${post.title}
 		</a>
 	</div>    
@@ -61,7 +61,7 @@ class Blog {
 	${post.exerpt}
 	</div>
 	<div class="ue_post_blocks_link">
-		<a href="https://dungeonsanddorks.github.io/">
+		<a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}">
 			Read More
 		</a>
 	</div>
