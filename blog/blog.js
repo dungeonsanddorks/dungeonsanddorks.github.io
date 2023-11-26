@@ -7,6 +7,7 @@ class Blog {
 	async loadPosts () {
 		this.postData = await fetch('/blog/post-data/posts.json').then(response => response.json())
 		this.posts = this.postData.posts
+		this.posts.sort((a,b) => b.dateLastModified - a.dateLastModified);
 	}
 
 	setUpBlogPageList () {
