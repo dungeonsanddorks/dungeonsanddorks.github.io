@@ -15,12 +15,6 @@ class Blog {
 		if (document.getElementsByClassName("uc_post_list")?.length > 0) {
 			this.posts.forEach(post => {
 				let date = new Date(post.dateLastModified * 1000)
-				postImage = post.image
-				postImageAlt = post.imageAlt;
-				if (postImage == undefined) {
-					postImage = "placeholder.jpeg";
-					postImageAlt = "";
-				}
 				this.output += `<div class="uc_post_list_box">
 	<div class="uc_post_list_image">
 		<a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}" target="_self" title="${post.title}">
