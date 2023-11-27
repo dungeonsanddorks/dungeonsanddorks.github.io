@@ -6,7 +6,7 @@ async function loadPosts() {
 
 function renderPost(post) {
 	var imageHTML = ""
-	if (post.image !== undefined) imageHTML = `<div class="post-thumb-img-content post-thumb">
+	if (post.image !== "placeholder.jpeg") imageHTML = `<div class="post-thumb-img-content post-thumb">
 		<img width="1024" height="768" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/post-data/images/${post.image}" class="attachment-large size-large wp-post-image" alt="${post.imageAlt}" itemprop="image" decoding="async" sizes="(max-width: 1024px) 100vw, 1024px">
 	</div>
 	`
