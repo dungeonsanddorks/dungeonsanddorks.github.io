@@ -18,7 +18,7 @@ class Blog {
 				this.output += `<div class="uc_post_list_box">
 	<div class="uc_post_list_image">
 		<a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}" target="_self" title="${post.title}">
-			<img decoding="async" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/post-data/images/${postImage}" alt="${postImageAlt}" width="768" height="576">
+			<img decoding="async" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/post-data/images/${post.image}" alt="${post.imageAlt}" width="768" height="576">
 		</a>
 	</div>
 	<div class="uc_post_list_content">
