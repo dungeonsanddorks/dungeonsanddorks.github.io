@@ -60,19 +60,19 @@ function checkForNavigation(post) {
 	var output = ""
 
 	var next = globalThis.posts.find(obj => {
-		return obj.id == post.id + 1
-	})
-
-	var previous = globalThis.posts.find(obj => {
 		return obj.id == post.id - 1
 	})
 
+	var previous = globalThis.posts.find(obj => {
+		return obj.id == post.id + 1
+	})
+
 	if (next) {
-		output += `<div class="nav-previous"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id + 1}" rel="prev"><span class="ast-left-arrow">←</span> Previous Post</a></div>`
+		output += `<div class="nav-previous"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id - 1}" rel="prev"><span class="ast-left-arrow">←</span> Previous Post</a></div>`
 	}
 	
 	if (previous) {
-		output += `<div class="nav-next"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id - 1}" rel="next">Next Post <span class="ast-right-arrow">→</span></a></div>`
+		output += `<div class="nav-next"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id + 1}" rel="next">Next Post <span class="ast-right-arrow">→</span></a></div>`
 	}
 
 	return output
