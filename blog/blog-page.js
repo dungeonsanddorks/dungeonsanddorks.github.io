@@ -59,22 +59,20 @@ function checkForTags(txt) {
 function checkForNavigation(post) {
 	var output = ""
 
-	var result = globalThis.posts.find(obj => {
-		let isNext = obj.id == post.id + 1
-		let isPrevious = obj.id == post.id - 1
-
-		return {next: isNext, previous: isPrevious}
+	var next = globalThis.posts.find(obj => {
+		return obj.id == post.id + 1
 	})
-	console.log(result)
-	console.log(globalThis.posts.find(obj => {
+
+	var previous = globalThis.posts.find(obj => {
 		return obj.id == post.id - 1
-	}))
-	if (result.next) {
-		output += `<div class="nav-previous"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id - 1}" rel="prev"><span class="ast-left-arrow">←</span> Previous Post</a></div>`
+	})
+
+	if (next) {
+		output += `<div class="nav-previous"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id + 1}" rel="prev"><span class="ast-left-arrow">←</span> Previous Post</a></div>`
 	}
 	
-	if (result.previous) {
-		output += `<div class="nav-next"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id + 1}" rel="next">Next Post <span class="ast-right-arrow">→</span></a></div>`
+	if (previous) {
+		output += `<div class="nav-next"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id - 1}" rel="next">Next Post <span class="ast-right-arrow">→</span></a></div>`
 	}
 
 	return output
