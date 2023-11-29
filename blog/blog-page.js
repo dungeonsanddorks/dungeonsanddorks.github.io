@@ -5,6 +5,7 @@ async function loadPosts() {
 }
 
 function renderPost(post) {
+	// Render Post Header
 	var imageHTML = ""
 	if (post.image !== "placeholder.jpeg") imageHTML = `<div class="post-thumb-img-content post-thumb">
 		<img width="1024" height="768" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/post-data/images/${post.image}" class="attachment-large size-large wp-post-image" alt="${post.imageAlt}" itemprop="image" decoding="async" sizes="(max-width: 1024px) 100vw, 1024px">
@@ -19,22 +20,26 @@ function renderPost(post) {
 	</header>
 `
 	document.getElementsByClassName("ast-post-format-")[0].innerHTML += output;
-	output = recursiveRenderer(post.entries, 0)
-	document.getElementsByClassName("ast-post-format-")[0].innerHTML += '<div class="entry-content clear" itemprop="text">' + output + '</div>';
+
+	// Render Post Content
+	document.getElementsByClassName("ast-post-format-")[0].innerHTML += '<div class="entry-content clear" itemprop="text">' + postRenderer(post.entries, 0) + '</div>';
+
+	// Render Navigation Links
+	document.getElementsByClassName("nav-links")[0].innerHTML = checkForNavigation(post);
 } 
 
-function recursiveRenderer(lineArr, depth) {
+function postRenderer(lineArr, depth) {
 	var output = ""
 	for (let i = 0; i < lineArr.length; i++) {
 		let line = lineArr[i]
 		if (line.type == "h3") {
 			output += `<h3 class="wp-block-heading">${checkForTags(line.entries[0])}</h3>`
-		} else if (line.type == "list" && line.typeOf == 'o') {
-			output += `<ol class="${line.classes}" style="${line.style}">`
+		} else if (line.type == "list") {
+			output += `<${line.typeOf}l class="${line.classes}" style="${line.style}">`
 			line.entries.forEach(listItem => {
 				output += `<li>${checkForTags(listItem)}</li>`
 			});
-			output += `</ol>`
+			output += `</${line.typeOf}l>`
 		} else {
 			output += `<p>${checkForTags(line)}</p>`
 		}
@@ -51,6 +56,26 @@ function checkForTags(txt) {
 	return output
 }
 
+function checkForNavigation(post) {
+	var output = ""
+
+	var result = globalThis.posts.find(obj => {
+		let isNext = obj.id == post.id + 1
+		let isPrevious = obj.id == post.id - 1
+
+		return {next: isNext, previous: isPrevious}
+	})
+	if (result.next) {
+		output += `<div class="nav-previous"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id - 1}" rel="prev"><span class="ast-left-arrow">←</span> Previous Post</a></div>`
+	}
+	
+	if (result.previous) {
+		output += `<div class="nav-next"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id + 1}" rel="next">Next Post <span class="ast-right-arrow">→</span></a></div>`
+	}
+
+	return output
+}
+
 async function init() {
 	const queryString = window.location.search
 	const urlParams = new URLSearchParams(queryString);
@@ -58,15 +83,15 @@ async function init() {
 	await loadPosts()
 	
 	const page = urlParams.has('post') ? urlParams.get('post') : 0;
-	for (let i = 0; i < globalThis.posts.length; i++) {
-		if (globalThis.posts[i].id == page) {
-			currentPost = globalThis.posts[i]
-			renderPost(currentPost)
-			return
-		}
-	}
+	const result = globalThis.posts.find(obj => {
+		return obj.id == page
+	})
 
-	renderPost(globalThis.posts[0])
+	if (result == undefined) {
+		renderPost(globalThis.posts[0])
+	} else {
+		renderPost(result)
+	}
 }
 
 init()
