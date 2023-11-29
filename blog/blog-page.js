@@ -65,6 +65,10 @@ function checkForNavigation(post) {
 
 		return {next: isNext, previous: isPrevious}
 	})
+	console.log(result)
+	console.log(globalThis.posts.find(obj => {
+		return obj.id == post.id - 1
+	}))
 	if (result.next) {
 		output += `<div class="nav-previous"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id - 1}" rel="prev"><span class="ast-left-arrow">←</span> Previous Post</a></div>`
 	}
