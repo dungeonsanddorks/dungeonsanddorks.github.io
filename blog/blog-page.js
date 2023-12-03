@@ -13,7 +13,7 @@ function renderPost(post) {
 	var output = `<header class="entry-header">
 	<h1 class="entry-title" itemprop="headline">${post.title}</h1>
 	<div class="entry-meta">
-	` +  /* TODO: Comments <span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/#respond?post=${post.id}">Leave a Comment</a></span> / */ /* TODO: Catagoreies <span class="ast-terms-link"><a href="https://dungeonsanddorks.github.io/category/uncategorized/">Uncategorized</a></span> / */ `By <span class="posted-by vcard author" itemtype="https://schema.org/Person" itemscope="itemscope" itemprop="author"><a title="View all posts by ${post.author}" href="https://dungeonsanddorks.github.io/author/${post.author.replaceAll(" ", "-").toLowerCase()}/" rel="author" class="url fn n" itemprop="url"><span class="author-name" itemprop="name">${post.author}</span> </a> </span> 
+	` +  /* TODO: Comments <span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#respond">Leave a Comment</a></span> / */ /* TODO: Catagoreies <span class="ast-terms-link"><a href="https://dungeonsanddorks.github.io/category/uncategorized/">Uncategorized</a></span> / */ `By <span class="posted-by vcard author" itemtype="https://schema.org/Person" itemscope="itemscope" itemprop="author"><a title="View all posts by ${post.author}" href="https://dungeonsanddorks.github.io/author/${post.author.replaceAll(" ", "-").toLowerCase()}/" rel="author" class="url fn n" itemprop="url"><span class="author-name" itemprop="name">${post.author}</span> </a> </span> 
 	</div>
 	${imageHTML}
 	</header>
@@ -57,7 +57,7 @@ async function init() {
 	var currentPost = {};
 	await loadPosts()
 	
-	const page = urlParams.has('post') ? urlParams.get('post') : 0;
+	const page = urlParams.has('post') ? urlParams.get('post').split('#')[0] : 0;
 	for (let i = 0; i < globalThis.posts.length; i++) {
 		if (globalThis.posts[i].id == page) {
 			currentPost = globalThis.posts[i]
