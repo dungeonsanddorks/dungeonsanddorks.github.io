@@ -29,7 +29,7 @@ function renderPost(post) {
 
 	// Render Comments
 	const renderedComments = renderComments(post)
-	if (renderedComments.title) document.getElementById("comments").innerHTML += `<div class="comments-count-wrapper"><h3 class="comments-title"></h3>${renderedComments.title}</h3></div>`
+	if (renderedComments.title) document.getElementById("comments").innerHTML += `<div class="comments-count-wrapper"><h3 class="comments-title">${renderedComments.title}</h3></div>`
 	if (renderedComments.comments) document.getElementById("comments").innerHTML += `<ol class="ast-comment-list">${renderedComments.comments}</ol>`
 } 
 
@@ -90,10 +90,10 @@ function renderComments(post) {
 		document.getElementsByClassName("entry-meta")[0].innerHTML = `<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#respond">Leave a Comment</a></span> /` + document.getElementsByClassName("entry-meta")[0].innerHTML;
 		return { comments: "", title: "" };
 	} else if (comments.length == 1) {
-		document.getElementsByClassName("entry-meta")[0].innerHTML = `<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#respond">1 Comment</a></span> /` + document.getElementsByClassName("entry-meta")[0].innerHTML;
+		document.getElementsByClassName("entry-meta")[0].innerHTML = `<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#comments">1 Comment</a></span> /` + document.getElementsByClassName("entry-meta")[0].innerHTML;
 		return { comments: "", title: `1 thought on “${post.title}”` }
 	} else {
-		document.getElementsByClassName("entry-meta")[0].innerHTML = `<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#respond">${comments.length} Comments</a></span> /` + document.getElementsByClassName("entry-meta")[0].innerHTML;
+		document.getElementsByClassName("entry-meta")[0].innerHTML = `<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#comments">${comments.length} Comments</a></span> /` + document.getElementsByClassName("entry-meta")[0].innerHTML;
 	}
 	
 	var output = ""
