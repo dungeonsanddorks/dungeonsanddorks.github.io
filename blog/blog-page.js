@@ -151,7 +151,51 @@ function checkForComments(post) {
   };
 }
 
-function renderComment(comment) {}
+function renderComment(comment) {
+  return `<li class="comment even thread-even depth-1" id="li-comment-1">
+	<article id="comment-1" class="ast-comment">
+		<div class="ast-comment-info">
+			<div class="ast-comment-avatar-wrap">
+				<img alt="" src="https://secure.gravatar.com/avatar/c5653504f48da574115fdf053f96db62?s=50&amp;d=mm&amp;r=g" class="avatar avatar-50 photo" height="50" width="50" decoding="async">
+			</div>
+			<div class="ast-comment-data-wrap">
+				<div class="ast-comment-meta-wrap">
+					<header class="ast-comment-meta ast-row ast-comment-author vcard capitalize">
+						<div class="ast-comment-cite-wrap ast-col-lg-12">
+							<cite>
+								<b class="fn">
+									Carric
+								</b> 
+							</cite>
+						</div>
+						<div class="ast-comment-time ast-col-lg-12">
+							<span class="timendate">
+								<a href="https://dungeonsanddorks.github.io/blog/?post=10#comment-1">
+									<time datetime="2023-10-27T20:19:52+00:00">October 27, 2023 at 8:19 pm</time>
+								</a>
+							</span>
+						</div>
+					</header>
+				</div> <!-- .ast-comment-meta -->
+			</div>
+			<section class="ast-comment-content comment">
+				<p>
+					one that led to the formation of the renowned group, the Rusty Saw.
+					<br>
+					NO HE DID NOT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				</p>
+				<div class="ast-comment-edit-reply-wrap">
+					<span class="ast-reply-link">
+						<a rel="nofollow" class="comment-reply-link" href="https://dungeonsanddorks.github.io/blog/?post=10&replytocom=1#respond" data-commentid="1" data-postid="10" data-belowelement="comment-1" data-respondelement="respond" data-replyto="Reply to Carric" aria-label="Reply to Carric">
+							Reply
+						</a>
+					</span>
+				</div>
+			</section> <!-- .ast-comment-content -->
+		</div>
+	</article><!-- #comment-## -->
+</li><!-- #comment-## -->`;
+}
 
 async function init() {
   const queryString = window.location.search;
