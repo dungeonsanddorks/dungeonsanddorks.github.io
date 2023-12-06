@@ -185,7 +185,8 @@ function renderComment(comment) {
 									<time datetime="${date.toISOString()}">${date.toLocaleString(
             "default",
             { month: "long" }
-          )} ${date.getDate()}, ${date.getFullYear()} at 8:19 pm</time>
+          )} ${date.getDate()}, ${date.getFullYear()} at ${date.getHours()}:
+					${date.getMinutes()}</time>
 								</a>
 							</span>
 						</div>
