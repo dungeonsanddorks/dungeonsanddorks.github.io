@@ -152,11 +152,19 @@ function checkForComments(post) {
 }
 
 function renderComment(comment) {
-  return `<li class="comment even thread-even depth-1" id="li-comment-1">
-	<article id="comment-1" class="ast-comment">
+	let avatar = comment.avatar == "default" ? "c5653504f48da574115fdf053f96db62.png" : comment.avatar;
+
+	let output = "<p>"
+	for (let i = 0; i < comment.comment; i++) {
+		output += comment.comment[0] + "<br>"
+	}
+	output = output.substring(0, output.length - 4) + "</p>"
+
+  return `<li class="comment even thread-even depth-1" id="li-comment-${comment.commentID}">
+	<article id="comment-${comment.commentID}" class="ast-comment">
 		<div class="ast-comment-info">
 			<div class="ast-comment-avatar-wrap">
-				<img alt="" src="https://secure.gravatar.com/avatar/c5653504f48da574115fdf053f96db62?s=50&amp;d=mm&amp;r=g" class="avatar avatar-50 photo" height="50" width="50" decoding="async">
+				<img alt="" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/comment-data/avatar-images/${avatar}" class="avatar avatar-50 photo" height="50" width="50" decoding="async">
 			</div>
 			<div class="ast-comment-data-wrap">
 				<div class="ast-comment-meta-wrap">
@@ -164,7 +172,7 @@ function renderComment(comment) {
 						<div class="ast-comment-cite-wrap ast-col-lg-12">
 							<cite>
 								<b class="fn">
-									Carric
+									${comment.author}
 								</b> 
 							</cite>
 						</div>
@@ -179,14 +187,10 @@ function renderComment(comment) {
 				</div> <!-- .ast-comment-meta -->
 			</div>
 			<section class="ast-comment-content comment">
-				<p>
-					one that led to the formation of the renowned group, the Rusty Saw.
-					<br>
-					NO HE DID NOT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				</p>
+				${output}
 				<div class="ast-comment-edit-reply-wrap">
 					<span class="ast-reply-link">
-						<a rel="nofollow" class="comment-reply-link" href="https://dungeonsanddorks.github.io/blog/?post=10&replytocom=1#respond" data-commentid="1" data-postid="10" data-belowelement="comment-1" data-respondelement="respond" data-replyto="Reply to Carric" aria-label="Reply to Carric">
+						<a rel="nofollow" class="comment-reply-link" href="https://dungeonsanddorks.github.io/blog/?post=${comment.postID}&replytocom=${comment.commentID}#respond" data-commentid="${comment.commentID}" data-postid="${comment.postID}" data-belowelement="comment-${comment.commentID}" data-respondelement="respond" data-replyto="Reply to ${comment.author}" aria-label="Reply to ${comment.author}">
 							Reply
 						</a>
 					</span>
