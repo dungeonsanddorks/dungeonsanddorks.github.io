@@ -152,10 +152,15 @@ function checkForComments(post) {
 }
 
 function renderComment(comment) {
-	let avatar = comment.avatar == "default" ? "c5653504f48da574115fdf053f96db62.png" : comment.avatar;
-	let date = new Date(comment.datePosted * 1000);
-
-
+	var avatar = comment.avatar == "default" ? "c5653504f48da574115fdf053f96db62.png" : comment.avatar;
+	
+  var date = new Date(comment.datePosted * 1000);
+  var hours = date.getHours() % 12 || 12
+  var meridiem = date.getHours() > 12 ? "pm" : "am"
+  var time = `${date.toLocaleString(
+    "default",
+    { month: "long" }
+  )} ${date.getDate()}, ${date.getFullYear()} at ${hours}:${date.getMinutes()} ${meridiem}`
 
 	var output = "<p>"
 	for (let i = 0; i < comment.comment.length; i++) {
@@ -182,11 +187,7 @@ function renderComment(comment) {
 						<div class="ast-comment-time ast-col-lg-12">
 							<span class="timendate">
 								<a href="https://dungeonsanddorks.github.io/blog/?post=${comment.postID}#comment-${comment.commentID}">
-									<time datetime="${date.toISOString()}">${date.toLocaleString(
-            "default",
-            { month: "long" }
-          )} ${date.getDate()}, ${date.getFullYear()} at ${date.getHours()}:
-					${date.getMinutes()}</time>
+									<time datetime="${date.toISOString()}">${time}</time>
 								</a>
 							</span>
 						</div>
