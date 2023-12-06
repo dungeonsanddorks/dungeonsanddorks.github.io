@@ -153,10 +153,13 @@ function checkForComments(post) {
 
 function renderComment(comment) {
 	let avatar = comment.avatar == "default" ? "c5653504f48da574115fdf053f96db62.png" : comment.avatar;
+	let date = new Date(comment.datePosted * 1000);
+
+
 
 	let output = "<p>"
-	for (let i = 0; i < comment.comment; i++) {
-		output += comment.comment[0] + "<br>"
+	for (let i = 0; i < comment.comment.length; i++) {
+		output += comment.comment[i] + "<br>"
 	}
 	output = output.substring(0, output.length - 4) + "</p>"
 
@@ -178,8 +181,11 @@ function renderComment(comment) {
 						</div>
 						<div class="ast-comment-time ast-col-lg-12">
 							<span class="timendate">
-								<a href="https://dungeonsanddorks.github.io/blog/?post=10#comment-1">
-									<time datetime="2023-10-27T20:19:52+00:00">October 27, 2023 at 8:19 pm</time>
+								<a href="https://dungeonsanddorks.github.io/blog/?post=${comment.postID}#comment-${comment.commentID}">
+									<time datetime="${date.toISOString()}">${date.toLocaleString(
+            "default",
+            { month: "long" }
+          )} ${date.getDate()}, ${date.getFullYear()} at 8:19 pm</time>
 								</a>
 							</span>
 						</div>
