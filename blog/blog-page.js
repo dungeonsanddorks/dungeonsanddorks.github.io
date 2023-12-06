@@ -157,7 +157,7 @@ function renderComment(comment) {
 
 
 
-	let output = "<p>"
+	var output = "<p>"
 	for (let i = 0; i < comment.comment.length; i++) {
 		output += comment.comment[i] + "<br>"
 	}
