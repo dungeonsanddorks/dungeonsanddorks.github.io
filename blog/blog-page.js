@@ -178,7 +178,7 @@ function renderComment(comment) {
 	}
 	output = output.substring(0, output.length - 4) + "</p>"
 
-  return `<li class="comment even thread-even depth-1" id="li-comment-${comment.commentID}">
+  return `<li class="comment even thread-even depth-${comment.depth}" id="li-comment-${comment.commentID}">
 	<article id="comment-${comment.commentID}" class="ast-comment">
 		<div class="ast-comment-info">
 			<div class="ast-comment-avatar-wrap">
