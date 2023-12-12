@@ -119,7 +119,7 @@ function checkForNavigation(post) {
 }
 
 function checkForComments(post) {
-  var comments = globalThis.comments.filter((obj) => obj.postID == post.id);
+  var comments = globalThis.comments.filter((obj) => obj.postID == post.id && obj.depth == 1);
 
   if (comments.length == 0) {
     document.getElementsByClassName("entry-meta")[0].innerHTML =
@@ -152,6 +152,16 @@ function checkForComments(post) {
 }
 
 function renderComment(comment) {
+  var moreComments = globalThis.comments.filter((obj) => obj.postID == post.id && obj.depth == comment.depth + 1 && obj.replyToID == comment.commentID);
+  var moreCommentTxt = ''
+  if (moreComments.length > 0) {
+    moreCommentTxt = '<ol class="children">'
+    for (const comment of moreComments) {
+      moreCommentTxt += renderComment(comment)
+    }
+    moreCommentTxt += '</ol>'
+  }
+
 	var avatar = comment.avatar == "default" ? "c5653504f48da574115fdf053f96db62.png" : comment.avatar;
 	
   var date = new Date(comment.datePosted * 1000);
@@ -206,6 +216,7 @@ function renderComment(comment) {
 			</section> <!-- .ast-comment-content -->
 		</div>
 	</article><!-- #comment-## -->
+  ${moreCommentTxt}
 </li><!-- #comment-## -->`;
 }
 
