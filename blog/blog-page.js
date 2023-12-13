@@ -152,7 +152,7 @@ function checkForComments(post) {
 }
 
 function renderComment(comment) {
-  var moreComments = globalThis.comments.filter((obj) => obj.postID == post.id && obj.depth == comment.depth + 1 && obj.replyToID == comment.commentID);
+  var moreComments = globalThis.comments.filter((obj) => obj.postID == comment.postID && obj.depth == comment.depth + 1 && obj.replyToID == comment.commentID);
   var moreCommentTxt = ''
   if (moreComments.length > 0) {
     moreCommentTxt = '<ol class="children">'
