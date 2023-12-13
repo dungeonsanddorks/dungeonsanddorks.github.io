@@ -119,35 +119,37 @@ function checkForNavigation(post) {
 }
 
 function checkForComments(post) {
-  var comments = globalThis.comments.filter((obj) => obj.postID == post.id && obj.depth == 1);
+  var totalComments = globalThis.comments.filter((obj) => obj.postID == post.id);
+  var isPural = totalComments.length > 1 ? "s" : ""
+  var topComments = globalThis.comments.filter((obj) => obj.postID == post.id && obj.depth == 1);
 
-  if (comments.length == 0) {
+  if (topComments.length == 0) {
     document.getElementsByClassName("entry-meta")[0].innerHTML =
       `<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#respond">Leave a Comment</a></span> /` +
       document.getElementsByClassName("entry-meta")[0].innerHTML;
     return { comments: "", title: "" };
-  } else if (comments.length == 1) {
+  } else if (topComments.length == 1) {
     document.getElementsByClassName("entry-meta")[0].innerHTML =
-      `<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#comments">1 Comment</a></span> /` +
+      `<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#comments">${totalComments.length} Comment${isPural}</a></span> /` +
       document.getElementsByClassName("entry-meta")[0].innerHTML;
     return {
-      comments: renderComment(comments[0]),
-      title: `1 thought on “${post.title}”`,
+      comments: renderComment(topComments[0]),
+      title: `${totalComments.length} thought${isPural} on “${post.title}”`,
     };
   } else {
     document.getElementsByClassName("entry-meta")[0].innerHTML =
-      `<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#comments">${comments.length} Comments</a></span> /` +
+      `<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#comments">${totalComments.length} Comments</a></span> /` +
       document.getElementsByClassName("entry-meta")[0].innerHTML;
   }
 
   var output = "";
-  for (const comment of comments) {
+  for (const comment of topComments) {
     output += renderComment(comment);
   }
 
   return {
     comments: output,
-    title: `${comments.length} thoughts on “${post.title}”`,
+    title: `${topComments.length} thoughts on “${post.title}”`,
   };
 }
 
