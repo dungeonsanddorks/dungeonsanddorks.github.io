@@ -263,7 +263,7 @@ function renderCommentBox(replyTo) {
 		>`
 	}
 
-	if (localStorage.savedCommentInfo.save == "checked") {
+	if (localStorage?.savedCommentInfo?.save == "checked") {
 		savedInfo = localStorage.savedCommentInfo
 	}
 
