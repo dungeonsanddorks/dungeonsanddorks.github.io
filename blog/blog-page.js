@@ -66,6 +66,7 @@ function renderPost(post, replyTo) {
 			"comments"
 		).innerHTML += renderCommentBox(replyTo);
 	}
+	document.getElementById("submit").addEventListener('click', submitComment())
 }
 
 function postRenderer(lineArr, depth) {
@@ -239,6 +240,12 @@ function renderComment(comment, replyTo) {
 
 function renderCommentBox(replyTo) {
 	var titleTxt = "Leave a Comment"
+	var savedInfo = {
+		save: "",
+		author: "",
+		email: "",
+		url: ""
+	}
 
 	if (replyTo) {
 		var commentReplyedTo = globalThis.comments.find((obj) => {
@@ -254,6 +261,10 @@ function renderCommentBox(replyTo) {
 				>Cancel Reply</a
 			></small
 		>`
+	}
+
+	if (localStorage.savedCommentInfo.save == "checked") {
+		savedInfo = localStorage.savedCommentInfo
 	}
 
 	return `<div id="respond" class="comment-respond">
@@ -291,7 +302,7 @@ function renderCommentBox(replyTo) {
 				id="author"
 				name="author"
 				type="text"
-				value=""
+				value="${savedInfo.name}"
 				placeholder="Name*"
 				size="30"
 				aria-required="true"
@@ -305,7 +316,7 @@ function renderCommentBox(replyTo) {
 				id="email"
 				name="email"
 				type="text"
-				value=""
+				value="${savedInfo.email}"
 				placeholder="Email*"
 				size="30"
 				aria-required="true"
@@ -320,7 +331,7 @@ function renderCommentBox(replyTo) {
 					id="url"
 					name="url"
 					type="text"
-					value=""
+					value="${savedInfo.url}"
 					placeholder="Website"
 					size="30"
 			/></label>
@@ -330,7 +341,7 @@ function renderCommentBox(replyTo) {
 		<input
 			id="wp-comment-cookies-consent"
 			name="wp-comment-cookies-consent"
-			type="checkbox"
+			type="checkbox" ${savedInfo.save}
 		/>
 		<label for="wp-comment-cookies-consent"
 			>Save my name, email, and website in this browser for the next time I
@@ -348,6 +359,26 @@ function renderCommentBox(replyTo) {
 	</p>
 </div>
 `
+}
+
+function submitComment() {
+	if (document.getElementById("wp-comment-cookies-consent").checked) {
+		localStorage.savedCommentInfo = {
+			save: "checked",
+			author: document.getElementById('author').value,
+			email: document.getElementById('email').value,
+			website: document.getElementById('url').value
+		}
+	} else {
+		localStorage.savedCommentInfo = {
+			save: "",
+			author: "",
+			email: "",
+			url: ""
+		}
+	}
+
+	// TODO: Use Firebase to save comments for moderation
 }
 
 async function init() {
