@@ -12,8 +12,6 @@ async function loadData() {
 }
 
 function renderPost(post, replyTo) {
-	console.log(replyTo)
-
 	// Render Post Header
 	var imageHTML = "";
 	if (post.image !== "placeholder.jpeg")
@@ -168,12 +166,11 @@ function renderComment(comment, replyTo) {
 	var moreComments = globalThis.comments.filter((obj) => obj.postID == comment.postID && obj.depth == comment.depth + 1 && obj.replyToID == comment.commentID);
 	var moreCommentTxt = ''
 	var replyBox = ''
-	console.log(replyTo)
 	if (replyTo == comment.commentID) {
 		replyBox = renderCommentBox(replyTo)
 	}
 
-	if (moreComments.length > 0) {
+	if (moreComments.length > 0 || replyBox.length > 0) {
 		moreCommentTxt = '<ol class="children">'
 		for (const comment of moreComments) {
 			moreCommentTxt += renderComment(comment)
@@ -360,7 +357,6 @@ async function init() {
 
 	globalThis.currentPage = urlParams.has("post") ? urlParams.get("post").split("#")[0] : 0;
 	const replyTo = urlParams.has("replytocom") ? urlParams.get("replytocom").split("#")[0] : 0;
-	console.log(replyTo)
 	const result = globalThis.posts.find((obj) => {
 		return obj.id == globalThis.currentPage;
 	});
