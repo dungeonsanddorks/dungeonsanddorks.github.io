@@ -263,7 +263,8 @@ function renderCommentBox(replyTo) {
 		>`
 	}
 
-	if (localStorage?.savedCommentInfo?.save == "checked") {
+	var savedCommentInfo = JSON.parse(localStorage.savedCommentInfo)
+	if (savedCommentInfo?.save == "checked") {
 		savedInfo = localStorage.savedCommentInfo
 	}
 
@@ -302,7 +303,7 @@ function renderCommentBox(replyTo) {
 				id="author"
 				name="author"
 				type="text"
-				value="${savedInfo.name}"
+				value="${savedInfo?.author}"
 				placeholder="Name*"
 				size="30"
 				aria-required="true"
@@ -316,7 +317,7 @@ function renderCommentBox(replyTo) {
 				id="email"
 				name="email"
 				type="text"
-				value="${savedInfo.email}"
+				value="${savedInfo?.email}"
 				placeholder="Email*"
 				size="30"
 				aria-required="true"
@@ -331,7 +332,7 @@ function renderCommentBox(replyTo) {
 					id="url"
 					name="url"
 					type="text"
-					value="${savedInfo.url}"
+					value="${savedInfo?.url}"
 					placeholder="Website"
 					size="30"
 			/></label>
@@ -341,7 +342,7 @@ function renderCommentBox(replyTo) {
 		<input
 			id="wp-comment-cookies-consent"
 			name="wp-comment-cookies-consent"
-			type="checkbox" ${savedInfo.save}
+			type="checkbox" ${savedInfo?.save}
 		/>
 		<label for="wp-comment-cookies-consent"
 			>Save my name, email, and website in this browser for the next time I
@@ -363,19 +364,19 @@ function renderCommentBox(replyTo) {
 
 function submitComment() {
 	if (document.getElementById("wp-comment-cookies-consent").checked) {
-		localStorage.savedCommentInfo = {
+		localStorage.savedCommentInfo = JSON.stringify({
 			save: "checked",
 			author: document.getElementById('author').value,
 			email: document.getElementById('email').value,
 			website: document.getElementById('url').value
-		}
+		})
 	} else {
-		localStorage.savedCommentInfo = {
+		localStorage.savedCommentInfo = JSON.stringify({
 			save: "",
 			author: "",
 			email: "",
 			url: ""
-		}
+		})
 	}
 
 	// TODO: Use Firebase to save comments for moderation
