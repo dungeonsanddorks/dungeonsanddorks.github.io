@@ -60,6 +60,12 @@ function renderPost(post, replyTo) {
 			"comments"
 		).innerHTML += `<ol class="ast-comment-list">${renderedComments.comments}</ol>`;
 	}
+
+	if (replyTo == 0) {
+		document.getElementById(
+			"comments"
+		).innerHTML += renderCommentBox(replyTo);
+	}
 }
 
 function postRenderer(lineArr, depth) {
@@ -130,7 +136,7 @@ function checkForComments(post, replyTo) {
 		document.getElementsByClassName("entry-meta")[0].innerHTML =
 			`<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${globalThis.currentPage}#respond">Leave a Comment</a></span> /` +
 			document.getElementsByClassName("entry-meta")[0].innerHTML;
-		return { comments: renderCommentBox(replyTo), title: "" };
+		return { comments: "", title: "" };
 	} else if (topComments.length == 1) {
 		document.getElementsByClassName("entry-meta")[0].innerHTML =
 			`<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${globalThis.currentPage}#comments">${totalComments.length} Comment${isPural}</a></span> /` +
@@ -232,7 +238,7 @@ function renderComment(comment, replyTo) {
 }
 
 function renderCommentBox(replyTo) {
-	var titleTxt = ""
+	var titleTxt = "Leave a Comment"
 
 	if (replyTo) {
 		var postReplyedTo = globalThis.posts.find((obj) => {
