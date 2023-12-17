@@ -241,16 +241,16 @@ function renderCommentBox(replyTo) {
 	var titleTxt = "Leave a Comment"
 
 	if (replyTo) {
-		var postReplyedTo = globalThis.posts.find((obj) => {
-			return obj.id == replyTo;
+		var commentReplyedTo = globalThis.comments.find((obj) => {
+			return obj.commentID == replyTo && obj.postID == globalThis.currentPage;
 		});
 		
-		titleTxt = `Reply to ${postReplyedTo.author}
+		titleTxt = `Reply to ${commentReplyedTo.author}
 		<small
 			><a
 				rel="nofollow"
 				id="cancel-comment-reply-link"
-				href="blog/?post=${globalThis.currentPage}#respond"
+				href="/blog/?post=${globalThis.currentPage}#respond"
 				>Cancel Reply</a
 			></small
 		>`
