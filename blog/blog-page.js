@@ -11,7 +11,7 @@ async function loadData() {
 	globalThis.comments = comments.comments;
 }
 
-function renderPost(post) {
+function renderPost(post, replyTo) {
 	// Render Post Header
 	var imageHTML = "";
 	if (post.image !== "placeholder.jpeg")
@@ -48,119 +48,18 @@ function renderPost(post) {
 		checkForNavigation(post);
 
 	// Render Comments
-	const renderedComments = checkForComments(post);
-	if (renderedComments.title)
+	const renderedComments = checkForComments(post, replyTo);
+	if (renderedComments.title) {
 		document.getElementById(
 			"comments"
 		).innerHTML += `<div class="comments-count-wrapper"><h3 class="comments-title">${renderedComments.title}</h3></div>`;
-	if (renderedComments.comments)
+	}
+		
+	if (renderedComments.comments) {
 		document.getElementById(
 			"comments"
 		).innerHTML += `<ol class="ast-comment-list">${renderedComments.comments}</ol>`;
-
-	document.getElementById(
-		"comments"
-	).innerHTML += `<div id="respond" class="comment-respond">
-		<h3 id="reply-title" class="comment-reply-title">
-			Leave a Comment
-			<small
-				><a
-					rel="nofollow"
-					id="cancel-comment-reply-link"
-					href="blog/?post=${post.id}#respond"
-					style="display: none"
-					>Cancel Reply</a
-				></small
-			>
-		</h3>
-		<p class="comment-notes">
-			<span id="email-notes">Your email address will not be published.</span>
-			<span class="required-field-message"
-				>Required fields are marked <span class="required">*</span></span
-			>
-		</p>
-		<div class="ast-row comment-textarea">
-			<fieldset class="comment-form-comment">
-				<legend class="comment-form-legend"></legend>
-				<div class="comment-form-textarea ast-col-lg-12">
-					<label for="comment" class="screen-reader-text">Type here..</label
-					><textarea
-						id="comment"
-						name="comment"
-						placeholder="Type here.."
-						cols="45"
-						rows="8"
-						aria-required="true"
-					></textarea>
-				</div>
-			</fieldset>
-		</div>
-		<div class="ast-comment-formwrap ast-row">
-			<p
-				class="comment-form-author ast-col-xs-12 ast-col-sm-12 ast-col-md-4 ast-col-lg-4"
-			>
-				<label for="author" class="screen-reader-text">Name*</label
-				><input
-					id="author"
-					name="author"
-					type="text"
-					value=""
-					placeholder="Name*"
-					size="30"
-					aria-required="true"
-				/>
-			</p>
-			<p
-				class="comment-form-email ast-col-xs-12 ast-col-sm-12 ast-col-md-4 ast-col-lg-4"
-			>
-				<label for="email" class="screen-reader-text">Email*</label
-				><input
-					id="email"
-					name="email"
-					type="text"
-					value=""
-					placeholder="Email*"
-					size="30"
-					aria-required="true"
-				/>
-			</p>
-			<p
-				class="comment-form-url ast-col-xs-12 ast-col-sm-12 ast-col-md-4 ast-col-lg-4"
-			>
-				<label for="url"
-					><label for="url" class="screen-reader-text">Website</label
-					><input
-						id="url"
-						name="url"
-						type="text"
-						value=""
-						placeholder="Website"
-						size="30"
-				/></label>
-			</p>
-		</div>
-		<p class="comment-form-cookies-consent">
-			<input
-				id="wp-comment-cookies-consent"
-				name="wp-comment-cookies-consent"
-				type="checkbox"
-			/>
-			<label for="wp-comment-cookies-consent"
-				>Save my name, email, and website in this browser for the next time I
-				comment.</label
-			>
-		</p>
-		<p class="form-submit">
-			<input
-				name="submit"
-				type="submit"
-				id="submit"
-				class="submit"
-				value="Post Comment »"
-			/>
-		</p>
-	</div>
-	`
+	}
 }
 
 function postRenderer(lineArr, depth) {
@@ -222,7 +121,7 @@ function checkForNavigation(post) {
 	return output;
 }
 
-function checkForComments(post) {
+function checkForComments(post, replyTo) {
 	var totalComments = globalThis.comments.filter((obj) => obj.postID == post.id);
 	var isPural = totalComments.length > 1 ? "s" : ""
 	var topComments = globalThis.comments.filter((obj) => obj.postID == post.id && obj.depth == 1);
@@ -231,13 +130,13 @@ function checkForComments(post) {
 		document.getElementsByClassName("entry-meta")[0].innerHTML =
 			`<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#respond">Leave a Comment</a></span> /` +
 			document.getElementsByClassName("entry-meta")[0].innerHTML;
-		return { comments: "", title: "" };
+		return { comments: renderCommentBox(replyTo), title: "" };
 	} else if (topComments.length == 1) {
 		document.getElementsByClassName("entry-meta")[0].innerHTML =
 			`<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#comments">${totalComments.length} Comment${isPural}</a></span> /` +
 			document.getElementsByClassName("entry-meta")[0].innerHTML;
 		return {
-			comments: renderComment(topComments[0]),
+			comments: renderComment(topComments[0], replyTo),
 			title: `${totalComments.length} thought${isPural} on “${post.title}”`,
 		};
 	} else {
@@ -248,7 +147,7 @@ function checkForComments(post) {
 
 	var output = "";
 	for (const comment of topComments) {
-		output += renderComment(comment);
+		output += renderComment(comment, replyTo);
 	}
 
 	return {
@@ -257,15 +156,21 @@ function checkForComments(post) {
 	};
 }
 
-function renderComment(comment) {
+function renderComment(comment, replyTo) {
 	var moreComments = globalThis.comments.filter((obj) => obj.postID == comment.postID && obj.depth == comment.depth + 1 && obj.replyToID == comment.commentID);
 	var moreCommentTxt = ''
+	var replyBox = ''
+	if (replyTo == comment.commentID) {
+		replyBox = renderCommentBox(replyTo)
+	}
+
 	if (moreComments.length > 0) {
 		moreCommentTxt = '<ol class="children">'
 		for (const comment of moreComments) {
 			moreCommentTxt += renderComment(comment)
 		}
-		moreCommentTxt += '</ol>'
+
+		moreCommentTxt += replyBox + '</ol>'
 	}
 
 	var avatar = comment.avatar == "default" ? "c5653504f48da574115fdf053f96db62.png" : comment.avatar;
@@ -326,20 +231,132 @@ function renderComment(comment) {
 </li><!-- #comment-## -->`;
 }
 
+function renderCommentBox(replyTo) {
+	if (replyTo) {
+		var postReplyedTo = globalThis.posts.find((obj) => {
+			return obj.id == replyTo;
+		});
+
+	}
+
+	return `<div id="respond" class="comment-respond">
+	<h3 id="reply-title" class="comment-reply-title">
+		Leave a Comment
+		<small
+			><a
+				rel="nofollow"
+				id="cancel-comment-reply-link"
+				href="blog/?post=${post.id}#respond"
+				style="display: none"
+				>Cancel Reply</a
+			></small
+		>
+	</h3>
+	<p class="comment-notes">
+		<span id="email-notes">Your email address will not be published.</span>
+		<span class="required-field-message"
+			>Required fields are marked <span class="required">*</span></span
+		>
+	</p>
+	<div class="ast-row comment-textarea">
+		<fieldset class="comment-form-comment">
+			<legend class="comment-form-legend"></legend>
+			<div class="comment-form-textarea ast-col-lg-12">
+				<label for="comment" class="screen-reader-text">Type here..</label
+				><textarea
+					id="comment"
+					name="comment"
+					placeholder="Type here.."
+					cols="45"
+					rows="8"
+					aria-required="true"
+				></textarea>
+			</div>
+		</fieldset>
+	</div>
+	<div class="ast-comment-formwrap ast-row">
+		<p
+			class="comment-form-author ast-col-xs-12 ast-col-sm-12 ast-col-md-4 ast-col-lg-4"
+		>
+			<label for="author" class="screen-reader-text">Name*</label
+			><input
+				id="author"
+				name="author"
+				type="text"
+				value=""
+				placeholder="Name*"
+				size="30"
+				aria-required="true"
+			/>
+		</p>
+		<p
+			class="comment-form-email ast-col-xs-12 ast-col-sm-12 ast-col-md-4 ast-col-lg-4"
+		>
+			<label for="email" class="screen-reader-text">Email*</label
+			><input
+				id="email"
+				name="email"
+				type="text"
+				value=""
+				placeholder="Email*"
+				size="30"
+				aria-required="true"
+			/>
+		</p>
+		<p
+			class="comment-form-url ast-col-xs-12 ast-col-sm-12 ast-col-md-4 ast-col-lg-4"
+		>
+			<label for="url"
+				><label for="url" class="screen-reader-text">Website</label
+				><input
+					id="url"
+					name="url"
+					type="text"
+					value=""
+					placeholder="Website"
+					size="30"
+			/></label>
+		</p>
+	</div>
+	<p class="comment-form-cookies-consent">
+		<input
+			id="wp-comment-cookies-consent"
+			name="wp-comment-cookies-consent"
+			type="checkbox"
+		/>
+		<label for="wp-comment-cookies-consent"
+			>Save my name, email, and website in this browser for the next time I
+			comment.</label
+		>
+	</p>
+	<p class="form-submit">
+		<input
+			name="submit"
+			type="submit"
+			id="submit"
+			class="submit"
+			value="Post Comment »"
+		/>
+	</p>
+</div>
+`
+}
+
 async function init() {
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	await loadData();
 
 	const page = urlParams.has("post") ? urlParams.get("post").split("#")[0] : 0;
+	const replyTo = urlParams.has("replytocom") ? urlParams.get("replytocom").split("#")[0] : 0;
 	const result = globalThis.posts.find((obj) => {
 		return obj.id == page;
 	});
 
 	if (result == undefined) {
-		renderPost(globalThis.posts[0]);
+		renderPost(globalThis.posts[0], replyTo);
 	} else {
-		renderPost(result);
+		renderPost(result, replyTo);
 	}
 }
 
