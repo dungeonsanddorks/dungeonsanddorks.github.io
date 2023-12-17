@@ -128,12 +128,12 @@ function checkForComments(post, replyTo) {
 
 	if (topComments.length == 0) {
 		document.getElementsByClassName("entry-meta")[0].innerHTML =
-			`<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#respond">Leave a Comment</a></span> /` +
+			`<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${globalThis.currentPage}#respond">Leave a Comment</a></span> /` +
 			document.getElementsByClassName("entry-meta")[0].innerHTML;
 		return { comments: renderCommentBox(replyTo), title: "" };
 	} else if (topComments.length == 1) {
 		document.getElementsByClassName("entry-meta")[0].innerHTML =
-			`<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#comments">${totalComments.length} Comment${isPural}</a></span> /` +
+			`<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${globalThis.currentPage}#comments">${totalComments.length} Comment${isPural}</a></span> /` +
 			document.getElementsByClassName("entry-meta")[0].innerHTML;
 		return {
 			comments: renderComment(topComments[0], replyTo),
@@ -141,7 +141,7 @@ function checkForComments(post, replyTo) {
 		};
 	} else {
 		document.getElementsByClassName("entry-meta")[0].innerHTML =
-			`<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}#comments">${totalComments.length} Comments</a></span> /` +
+			`<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${globalThis.currentPage}#comments">${totalComments.length} Comments</a></span> /` +
 			document.getElementsByClassName("entry-meta")[0].innerHTML;
 	}
 
@@ -232,25 +232,27 @@ function renderComment(comment, replyTo) {
 }
 
 function renderCommentBox(replyTo) {
+	var titleTxt = ""
+
 	if (replyTo) {
 		var postReplyedTo = globalThis.posts.find((obj) => {
 			return obj.id == replyTo;
 		});
-
-	}
-
-	return `<div id="respond" class="comment-respond">
-	<h3 id="reply-title" class="comment-reply-title">
-		Leave a Comment
+		
+		titleTxt = `Reply to ${postReplyedTo.author}
 		<small
 			><a
 				rel="nofollow"
 				id="cancel-comment-reply-link"
-				href="blog/?post=${post.id}#respond"
-				style="display: none"
+				href="blog/?post=${globalThis.currentPage}#respond"
 				>Cancel Reply</a
 			></small
-		>
+		>`
+	}
+
+	return `<div id="respond" class="comment-respond">
+	<h3 id="reply-title" class="comment-reply-title">
+		${titleTxt}
 	</h3>
 	<p class="comment-notes">
 		<span id="email-notes">Your email address will not be published.</span>
@@ -347,10 +349,10 @@ async function init() {
 	const urlParams = new URLSearchParams(queryString);
 	await loadData();
 
-	const page = urlParams.has("post") ? urlParams.get("post").split("#")[0] : 0;
+	globalThis.currentPage = urlParams.has("post") ? urlParams.get("post").split("#")[0] : 0;
 	const replyTo = urlParams.has("replytocom") ? urlParams.get("replytocom").split("#")[0] : 0;
 	const result = globalThis.posts.find((obj) => {
-		return obj.id == page;
+		return obj.id == globalThis.currentPage;
 	});
 
 	if (result == undefined) {
