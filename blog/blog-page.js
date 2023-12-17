@@ -240,12 +240,6 @@ function renderComment(comment, replyTo) {
 
 function renderCommentBox(replyTo) {
 	var titleTxt = "Leave a Comment"
-	var savedInfo = {
-		save: "",
-		author: "",
-		email: "",
-		url: ""
-	}
 
 	if (replyTo) {
 		var commentReplyedTo = globalThis.comments.find((obj) => {
@@ -263,9 +257,16 @@ function renderCommentBox(replyTo) {
 		>`
 	}
 
-	var savedCommentInfo = JSON.parse(localStorage.savedCommentInfo)
-	if (savedCommentInfo?.save == "checked") {
-		savedInfo = localStorage.savedCommentInfo
+	var savedCommentInfo = "";
+	try {
+		savedCommentInfo = JSON.parse(localStorage.savedCommentInfo)
+	} catch (error) {
+		savedCommentInfo = {
+			save: "",
+			author: "",
+			email: "",
+			url: ""
+		}
 	}
 
 	return `<div id="respond" class="comment-respond">
