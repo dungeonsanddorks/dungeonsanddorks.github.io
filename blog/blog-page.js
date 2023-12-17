@@ -257,7 +257,7 @@ function renderCommentBox(replyTo) {
 		>`
 	}
 
-	var savedCommentInfo = "";
+	var savedCommentInfo = {};
 	try {
 		savedCommentInfo = JSON.parse(localStorage.savedCommentInfo)
 	} catch (error) {
@@ -304,7 +304,7 @@ function renderCommentBox(replyTo) {
 				id="author"
 				name="author"
 				type="text"
-				value="${savedInfo?.author}"
+				value="${savedCommentInfo.author}"
 				placeholder="Name*"
 				size="30"
 				aria-required="true"
@@ -318,7 +318,7 @@ function renderCommentBox(replyTo) {
 				id="email"
 				name="email"
 				type="text"
-				value="${savedInfo?.email}"
+				value="${savedCommentInfo.email}"
 				placeholder="Email*"
 				size="30"
 				aria-required="true"
@@ -333,7 +333,7 @@ function renderCommentBox(replyTo) {
 					id="url"
 					name="url"
 					type="text"
-					value="${savedInfo?.url}"
+					value="${savedCommentInfo.url}"
 					placeholder="Website"
 					size="30"
 			/></label>
@@ -343,7 +343,7 @@ function renderCommentBox(replyTo) {
 		<input
 			id="wp-comment-cookies-consent"
 			name="wp-comment-cookies-consent"
-			type="checkbox" ${savedInfo?.save}
+			type="checkbox" ${savedCommentInfo.save}
 		/>
 		<label for="wp-comment-cookies-consent"
 			>Save my name, email, and website in this browser for the next time I
