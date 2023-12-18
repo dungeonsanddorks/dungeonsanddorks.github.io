@@ -416,6 +416,17 @@ function submitComment(depth) {
     "This is what was cached:\n" + localStorage.savedCommentInfo
   );
 
+	var newComment = {
+    postID: globalThis.currentPage,
+    commentID: globalThis.lastCommentID + 1,
+    depth: depth,
+    replyTo: globalThis.replyTo == 0 ? undefined : globalThis.replyTo,
+    author: document.getElementById("author").value,
+    avatar: "default",
+    datePosted: Date.now(),
+    comment: document.getElementById("comment").value.split('\n'),
+  }
+
   // TODO: Use Firebase to save comments for moderation
 
 	var pendingComments = {};
@@ -425,16 +436,7 @@ function submitComment(depth) {
 		pendingComments = []
 	}
 
-  pendingComments.push({
-    postID: globalThis.currentPage,
-    commentID: globalThis.lastCommentID + 1,
-    depth: depth,
-    replyTo: globalThis.replyTo == 0 ? undefined : globalThis.replyTo,
-    author: document.getElementById("author").value,
-    avatar: "default",
-    datePosted: Date.now(),
-    comment: [document.getElementById("comment").value],
-  });
+  pendingComments.push(newComment);
 
 	localStorage.pendingComments = JSON.stringify(pendingComments)
 
