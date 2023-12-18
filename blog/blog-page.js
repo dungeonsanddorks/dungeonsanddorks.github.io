@@ -418,8 +418,14 @@ function submitComment(depth) {
 
   // TODO: Use Firebase to save comments for moderation
 
-  localStorage.pendingComments = Array.isArray(localStorage.pendingComments) ? localStorage.pendingComments : [];
-  localStorage.pendingComments.push({
+	var pendingComments = {};
+	try {
+		pendingComments = JSON.parse(localStorage.pendingComments)
+	} catch (error) {
+		pendingComments = []
+	}
+
+  pendingComments.push({
     postID: globalThis.currentPage,
     commentID: globalThis.lastCommentID + 1,
     depth: depth,
@@ -429,6 +435,8 @@ function submitComment(depth) {
     datePosted: Date.now(),
     comment: [document.getElementById("comment").value],
   });
+
+	localStorage.pendingComments = JSON.stringify(pendingComments)
 
   // TODO: Refresh page
 }
