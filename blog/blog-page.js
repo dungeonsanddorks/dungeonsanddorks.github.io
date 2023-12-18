@@ -11,7 +11,7 @@ async function loadData() {
 	globalThis.comments = comments.comments;
 }
 
-function renderPost(post, replyTo) {
+function renderPost(post) {
 	// Render Post Header
 	var imageHTML = "";
 	if (post.image !== "placeholder.jpeg")
@@ -48,7 +48,7 @@ function renderPost(post, replyTo) {
 		checkForNavigation(post);
 
 	// Render Comments
-	const renderedComments = checkForComments(post, replyTo);
+	const renderedComments = checkForComments(post);
 	if (renderedComments.title) {
 		document.getElementById(
 			"comments"
@@ -61,12 +61,11 @@ function renderPost(post, replyTo) {
 		).innerHTML += `<ol class="ast-comment-list">${renderedComments.comments}</ol>`;
 	}
 
-	if (replyTo == 0) {
+	if (globalThis.replyTo == 0) {
 		document.getElementById(
 			"comments"
-		).innerHTML += renderCommentBox(replyTo);
+		).innerHTML += renderCommentBox();
 	}
-	document.getElementById("submit").addEventListener('click', submitComment())
 }
 
 function postRenderer(lineArr, depth) {
@@ -128,8 +127,11 @@ function checkForNavigation(post) {
 	return output;
 }
 
-function checkForComments(post, replyTo) {
+function checkForComments(post) {
 	var totalComments = globalThis.comments.filter((obj) => obj.postID == post.id);
+	globalThis.lastCommentID = totalComments.sort((a, b) => {
+		return b.commentID - a.commentID
+	})[0].commentID
 	var isPural = totalComments.length > 1 ? "s" : ""
 	var topComments = globalThis.comments.filter((obj) => obj.postID == post.id && obj.depth == 1);
 
@@ -143,7 +145,7 @@ function checkForComments(post, replyTo) {
 			`<span class="comments-link"><a href="https://dungeonsanddorks.github.io/blog/?post=${globalThis.currentPage}#comments">${totalComments.length} Comment${isPural}</a></span> /` +
 			document.getElementsByClassName("entry-meta")[0].innerHTML;
 		return {
-			comments: renderComment(topComments[0], replyTo),
+			comments: renderComment(topComments[0]),
 			title: `${totalComments.length} thought${isPural} on “${post.title}”`,
 		};
 	} else {
@@ -154,7 +156,7 @@ function checkForComments(post, replyTo) {
 
 	var output = "";
 	for (const comment of topComments) {
-		output += renderComment(comment, replyTo);
+		output += renderComment(comment);
 	}
 
 	return {
@@ -163,12 +165,12 @@ function checkForComments(post, replyTo) {
 	};
 }
 
-function renderComment(comment, replyTo) {
+function renderComment(comment) {
 	var moreComments = globalThis.comments.filter((obj) => obj.postID == comment.postID && obj.depth == comment.depth + 1 && obj.replyToID == comment.commentID);
 	var moreCommentTxt = ''
 	var replyBox = ''
-	if (replyTo == comment.commentID) {
-		replyBox = renderCommentBox(replyTo)
+	if (globalThis.replyTo == comment.commentID) {
+		replyBox = renderCommentBox()
 	}
 
 	if (moreComments.length > 0 || replyBox.length > 0) {
@@ -238,12 +240,13 @@ function renderComment(comment, replyTo) {
 </li><!-- #comment-## -->`;
 }
 
-function renderCommentBox(replyTo) {
-	var titleTxt = "Leave a Comment"
+function renderCommentBox() {
+	var titleTxt = "Leave a Comment";
+	var depth = 1;
 
-	if (replyTo) {
+	if (globalThis.replyTo) {
 		var commentReplyedTo = globalThis.comments.find((obj) => {
-			return obj.commentID == replyTo && obj.postID == globalThis.currentPage;
+			return obj.commentID == globalThis.replyTo && obj.postID == globalThis.currentPage;
 		});
 		
 		titleTxt = `Reply to ${commentReplyedTo.author}
@@ -255,6 +258,8 @@ function renderCommentBox(replyTo) {
 				>Cancel Reply</a
 			></small
 		>`
+
+		depth = commentReplyedTo.depth + 1
 	}
 
 	var savedCommentInfo = {};
@@ -357,13 +362,16 @@ function renderCommentBox(replyTo) {
 			id="submit"
 			class="submit"
 			value="Post Comment »"
+			onclick="submitComment(${depth})"
 		/>
 	</p>
 </div>
 `
 }
 
-function submitComment() {
+function submitComment(depth) {
+	console.log('Ran "submitComment()"')
+	console.log(document.getElementById("wp-comment-cookies-consent").checked)
 	if (document.getElementById("wp-comment-cookies-consent").checked) {
 		localStorage.savedCommentInfo = JSON.stringify({
 			save: "checked",
@@ -380,7 +388,25 @@ function submitComment() {
 		})
 	}
 
+	console.log('This is what was cached:\n' + JSON.parse(localStorage.savedCommentInfo))
+
 	// TODO: Use Firebase to save comments for moderation
+
+	localStorage.pendingComments = localStorage.pendingComments || []
+	localStorage.pendingComments.push({
+		postID: globalThis.currentPage,
+		commentID: globalThis.lastCommentID + 1,
+		depth: depth,
+		replyTo: globalThis.replyTo == 0 ? undefined : globalThis.replyTo,
+		author: document.getElementById('author').value,
+		avatar: "default",
+		datePosted: Date.now(),
+		comment: [
+			document.getElementById('comment').value
+		]
+	})
+	
+	// TODO: Refresh page
 }
 
 async function init() {
@@ -389,15 +415,15 @@ async function init() {
 	await loadData();
 
 	globalThis.currentPage = urlParams.has("post") ? urlParams.get("post").split("#")[0] : 0;
-	const replyTo = urlParams.has("replytocom") ? urlParams.get("replytocom").split("#")[0] : 0;
+	globalThis.replyTo = urlParams.has("replytocom") ? urlParams.get("replytocom").split("#")[0] : 0;
 	const result = globalThis.posts.find((obj) => {
 		return obj.id == globalThis.currentPage;
 	});
 
 	if (result == undefined) {
-		renderPost(globalThis.posts[0], replyTo);
+		renderPost(globalThis.posts[0]);
 	} else {
-		renderPost(result, replyTo);
+		renderPost(result);
 	}
 }
 
