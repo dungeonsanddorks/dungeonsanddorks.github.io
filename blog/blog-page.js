@@ -220,7 +220,7 @@ function renderComment(comment) {
 
   var output = "<p>";
   for (let i = 0; i < comment.comment.length; i++) {
-    output += comment.comment[i] + "<br>";
+    output += checkForTags(comment.comment[i]) + "<br>";
   }
   output = output.substring(0, output.length - 4) + "</p>";
 
