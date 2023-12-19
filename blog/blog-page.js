@@ -8,7 +8,16 @@ async function loadData() {
   globalThis.posts = posts.posts.sort(
     (a, b) => b.dateLastModified - a.dateLastModified
   );
-  globalThis.comments = comments.comments;
+  var approvedComments = comments.comments;
+	if (Array.isArray(localStorage.pendingComments)) {
+    for (const comment of localStorage.pendingComments) {
+      // TODO: Delete if duplicate
+    }
+
+    globalThis.comments = approvedComments.concat(localStorage.pendingComments)
+  } else {
+    globalThis.comments = approvedComments
+  }
 }
 
 function renderPost(post) {
@@ -91,6 +100,7 @@ function postRenderer(lineArr, depth) {
 function checkForTags(txt) {
   output = txt;
   output = output.replaceAll(/{@b (.*)}/g, "<strong>$1</strong>"); // Bold
+  output = output.replaceAll(/{@i (.*)}/g, "<i>$1</i>"); // Italic
   output = output.replaceAll(
     /{@link (.*)\|(.*)}/g,
     '<a target="_blank" href="$2">$1</a>'
@@ -436,11 +446,12 @@ function submitComment(depth) {
 		pendingComments = []
 	}
 
+  newComment.comment.unshift("{@b {@i(This comment is pending approval)}}")
   pendingComments.push(newComment);
 
 	localStorage.pendingComments = JSON.stringify(pendingComments)
 
-  // TODO: Refresh page
+  // TODO: Reload page
 }
 
 async function init() {
