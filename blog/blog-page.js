@@ -435,7 +435,7 @@ function submitComment(depth) {
     replyToID: globalThis.replyTo == 0 ? undefined : globalThis.replyTo,
     author: document.getElementById("author").value,
     avatar: "default",
-    datePosted: Date.now(),
+    datePosted: Date.now() / 1000,
     comment: document.getElementById("comment").value.split('\n'),
   }
 
