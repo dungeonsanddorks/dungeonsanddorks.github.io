@@ -220,7 +220,11 @@ function renderComment(comment) {
 
   var output = "<p>";
   for (let i = 0; i < comment.comment.length; i++) {
-    output += checkForTags(comment.comment[i]) + "<br>";
+    let commentLine = checkForTags(comment.comment[i])
+    output += commentLine;
+
+    if (commentLine !== "<hr>") output += "<br>";
+
   }
   output = output.substring(0, output.length - 4) + "</p>";
 
@@ -448,7 +452,8 @@ function submitComment(depth) {
 		pendingComments = []
 	}
 
-  newComment.comment.unshift("{@b {@i(This comment is pending approval)}}")
+  newComment.comment.unshift("<hr>")
+  newComment.comment.unshift("{@b {@i This comment is pending approval}}")
   pendingComments.push(newComment);
 
 	localStorage.pendingComments = JSON.stringify(pendingComments)
