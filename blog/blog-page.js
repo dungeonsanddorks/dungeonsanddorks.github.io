@@ -412,7 +412,6 @@ function renderCommentBox() {
 
 function submitComment(depth) {
   console.log('Ran "submitComment()"');
-  console.log(document.getElementById("wp-comment-cookies-consent").checked);
   if (document.getElementById("wp-comment-cookies-consent").checked) {
     localStorage.savedCommentInfo = JSON.stringify({
       save: "checked",
@@ -429,15 +428,11 @@ function submitComment(depth) {
     });
   }
 
-  console.log(
-    "This is what was cached:\n" + localStorage.savedCommentInfo
-  );
-
 	var newComment = {
     postID: globalThis.currentPage,
     commentID: globalThis.lastCommentID + 1,
     depth: depth,
-    replyTo: globalThis.replyTo == 0 ? undefined : globalThis.replyTo,
+    replyToID: globalThis.replyTo == 0 ? undefined : globalThis.replyTo,
     author: document.getElementById("author").value,
     avatar: "default",
     datePosted: Date.now(),
@@ -467,10 +462,10 @@ async function init() {
   await loadData();
 
   globalThis.currentPage = urlParams.has("post")
-    ? urlParams.get("post").split("#")[0]
+    ? Number(urlParams.get("post").split("#")[0])
     : 0;
   globalThis.replyTo = urlParams.has("replytocom")
-    ? urlParams.get("replytocom").split("#")[0]
+    ? Number(urlParams.get("replytocom").split("#")[0])
     : 0;
   const result = globalThis.posts.find((obj) => {
     return obj.id == globalThis.currentPage;
