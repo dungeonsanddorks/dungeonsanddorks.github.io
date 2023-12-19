@@ -11,19 +11,19 @@ async function loadData() {
 
   var approvedComments = comments.comments;
   try {
-    var newComments = JSON.parse(localStorage.pendingComments)
+    var newComments = JSON.parse(localStorage.pendingComments);
   } catch (error) {
-    var newComments = []
+    var newComments = [];
   }
 
-	if (Array.isArray(newComments)) {
+  if (Array.isArray(newComments)) {
     for (const comment of newComments) {
       // TODO: Delete if duplicate
     }
 
-    globalThis.comments = approvedComments.concat(newComments)
+    globalThis.comments = approvedComments.concat(newComments);
   } else {
-    globalThis.comments = approvedComments
+    globalThis.comments = approvedComments;
   }
 }
 
@@ -40,7 +40,7 @@ function renderPost(post) {
 	<h1 class="entry-title" itemprop="headline">${post.title}</h1>
 	<div class="entry-meta">
 	` +
-    /* TODO: Comments  */ /* TODO: Catagoreies <span class="ast-terms-link"><a href="https://dungeonsanddorks.github.io/category/uncategorized/">Uncategorized</a></span> / */ `By <span class="posted-by vcard author" itemtype="https://schema.org/Person" itemscope="itemscope" itemprop="author"><a title="View all posts by ${
+    /* TODO: Catagoreies <span class="ast-terms-link"><a href="https://dungeonsanddorks.github.io/category/uncategorized/">Uncategorized</a></span> / */ `By <span class="posted-by vcard author" itemtype="https://schema.org/Person" itemscope="itemscope" itemprop="author"><a title="View all posts by ${
       post.author
     }" href="https://dungeonsanddorks.github.io/author/${post.author
       .replaceAll(" ", "-")
@@ -220,11 +220,10 @@ function renderComment(comment) {
 
   var output = "<p>";
   for (let i = 0; i < comment.comment.length; i++) {
-    let commentLine = checkForTags(comment.comment[i])
+    let commentLine = checkForTags(comment.comment[i]);
     output += commentLine;
 
     if (commentLine !== "<hr>") output += "<br>";
-
   }
   output = output.substring(0, output.length - 4) + "</p>";
 
@@ -432,7 +431,7 @@ function submitComment(depth) {
     });
   }
 
-	var newComment = {
+  var newComment = {
     postID: globalThis.currentPage,
     commentID: globalThis.lastCommentID + 1,
     depth: depth,
@@ -440,23 +439,26 @@ function submitComment(depth) {
     author: document.getElementById("author").value,
     avatar: "default",
     datePosted: Date.now() / 1000,
-    comment: document.getElementById("comment").value.split('\n'),
-  }
+    comment: document.getElementById("comment").value.split("\n"),
+  };
 
   // TODO: Use Firebase to save comments for moderation
 
-	var pendingComments = {};
-	try {
-		pendingComments = JSON.parse(localStorage.pendingComments)
-	} catch (error) {
-		pendingComments = []
-	}
+  var pendingComments = {};
+  try {
+    pendingComments = JSON.parse(localStorage.pendingComments);
+  } catch (error) {
+    pendingComments = [];
+  }
 
-  newComment.comment.unshift("<hr>")
-  newComment.comment.unshift("{@b {@i This comment is pending approval}}")
+  newComment.comment.unshift(
+    "{@b {@i This comment is pending approval}}",
+    "<hr>"
+  );
+  newComment.pending = true;
   pendingComments.push(newComment);
 
-	localStorage.pendingComments = JSON.stringify(pendingComments)
+  localStorage.pendingComments = JSON.stringify(pendingComments);
 
   // TODO: Reload page
 }
