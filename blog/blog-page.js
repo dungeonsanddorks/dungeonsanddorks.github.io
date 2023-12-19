@@ -8,13 +8,20 @@ async function loadData() {
   globalThis.posts = posts.posts.sort(
     (a, b) => b.dateLastModified - a.dateLastModified
   );
+
   var approvedComments = comments.comments;
-	if (Array.isArray(localStorage.pendingComments)) {
-    for (const comment of localStorage.pendingComments) {
+  try {
+    var newComments = JSON.parse(localStorage.pendingComments)
+  } catch (error) {
+    var newComments = []
+  }
+
+	if (Array.isArray(newComments)) {
+    for (const comment of newComments) {
       // TODO: Delete if duplicate
     }
 
-    globalThis.comments = approvedComments.concat(localStorage.pendingComments)
+    globalThis.comments = approvedComments.concat(newComments)
   } else {
     globalThis.comments = approvedComments
   }
