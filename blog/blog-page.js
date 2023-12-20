@@ -473,7 +473,8 @@ function submitComment(depth) {
 
 	localStorage.pendingComments = JSON.stringify(pendingComments);
 
-	location.href = `/blog/?post=${globalThis.currentPage}#comment-${newComment.commentID}`
+	location.href = `/blog/?post=${globalThis.currentPage}#comment-${newComment.commentID}`;
+	location.reload();
 }
 
 async function init() {
