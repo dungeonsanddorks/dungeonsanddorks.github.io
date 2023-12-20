@@ -19,7 +19,7 @@ async function loadData() {
 	if (Array.isArray(newComments)) {
 		for (let i = 0; i < newComments.length; i++) {
 			let comment = newComments[i]
-			var matchingComment = globalThis.comments.find((obj) => {
+			var matchingComment = approvedComments.find((obj) => {
 				return (
 					obj.commentID == comment.commentID &&
 					obj.postID == comment.postID
