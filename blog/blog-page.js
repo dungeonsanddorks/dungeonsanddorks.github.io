@@ -94,7 +94,7 @@ function renderPost(post) {
 		document.getElementById("comments").innerHTML += renderCommentBox();
 	}
 
-	applyHash()
+	applyHash(window.location.hash)
 }
 
 function postRenderer(lineArr, depth) {
@@ -501,8 +501,9 @@ async function init() {
 	}
 }
 
-function applyHash() {
-	window.location.hash = window.location.hash
+function applyHash(hash) {
+	console.log("Applying Hash: " + hash)
+	window.location.hash = hash
 }
 
 init();
