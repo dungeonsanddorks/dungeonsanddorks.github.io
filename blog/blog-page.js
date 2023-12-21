@@ -94,7 +94,7 @@ function renderPost(post) {
 		document.getElementById("comments").innerHTML += renderCommentBox();
 	}
 
-	applyHash(window.location.hash)
+ 	setTimeout(100, () => applyHash(window.location.hash))
 }
 
 function postRenderer(lineArr, depth) {
