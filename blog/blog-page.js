@@ -499,4 +499,10 @@ async function init() {
 	}
 }
 
+function applyHash() {
+	window.location.hash = window.location.hash
+}
+
+window.addEventListener('load', () => applyHash())
+
 init();
