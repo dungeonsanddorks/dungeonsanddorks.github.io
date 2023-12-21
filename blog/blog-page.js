@@ -502,6 +502,7 @@ async function init() {
 }
 
 function applyHash(hash) {
+	window.location.hash = ""
 	console.log("Applying Hash: " + hash)
 	window.location.hash = hash
 }
