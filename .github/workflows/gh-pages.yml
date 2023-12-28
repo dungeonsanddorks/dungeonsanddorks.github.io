@@ -56,7 +56,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:  
       - name: Export API Key
-        working-directory: temp
         shell: bash
         run: |
-          setEnvironment.sh ${{ secrets.FIREBASECONFIG }}
+          https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/temp/setEnvironment.sh ${{ secrets.FIREBASECONFIG }}
