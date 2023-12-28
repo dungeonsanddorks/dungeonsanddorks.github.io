@@ -56,4 +56,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:  
       - name: Export API Key
-        run: ./setEnvironment.sh ${{ secrets.FIREBASECONFIG }}
+        working-directory: ./.github
+        run: bash setEnvironment.sh ${{ secrets.FIREBASECONFIG }}
