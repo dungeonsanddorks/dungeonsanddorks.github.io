@@ -60,4 +60,4 @@ jobs:
         shell: bash
         run: |
           echo $PATH
-          setEnvironment.sh ${{ secrets.FIREBASECONFIG }}
+          ./setEnvironment.sh ${{ secrets.FIREBASECONFIG }}
