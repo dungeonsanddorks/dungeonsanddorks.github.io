@@ -459,7 +459,7 @@ function submitComment(depth) {
 		comment: document.getElementById("comment").value.split("\n"),
 	};
 
-	const firebaseComment = JSON.stringify(JSON.parse(newComment));
+	const firebaseComment = JSON.parse(JSON.stringify(newComment));
 	var newElement = document.createElement('script')
 	newElement.setAttribute('src', "https://www.gstatic.com/firebasejs/8.2.4/firebase.js")
 	document.body.appendChild(newElement).onload = function() {
