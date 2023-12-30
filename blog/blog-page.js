@@ -429,6 +429,8 @@ function renderCommentBox() {
 }
 
 function submitComment(depth) {
+	globalThis.reloadReady = false;
+
 	console.log('Ran "submitComment()"');
 	if (document.getElementById("wp-comment-cookies-consent").checked) {
 		localStorage.savedCommentInfo = JSON.stringify({
@@ -457,7 +459,33 @@ function submitComment(depth) {
 		comment: document.getElementById("comment").value.split("\n"),
 	};
 
-	// TODO: Use Firebase to save comments for moderation
+	const firebaseComment = structuredClone(newComment);
+	var newElement = document.createElement('script')
+	newElement.setAttribute('src', "https://www.gstatic.com/firebasejs/8.2.4/firebase.js")
+	document.body.appendChild(newElement).onload = function() {
+		import("../env/env.js").then((env) => {
+			var vals = env.environment.apiKey.split(',')
+			var keys = ['apiKey', 'authDomain', 'databaseURL', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'];
+			var firebaseConfig = {};
+			for (let i = 0; i < keys.length; i++) {
+				firebaseConfig[keys[i]] = vals[i]
+			}
+			firebase.initializeApp(firebaseConfig);
+			
+			const firebaseDatabase = firebase.database();
+			const pendingCommentsRef = firebaseDatabase.ref("pendingComments")
+			
+			var newCommentRef = firebaseComment.postID + "-" + firebaseComment.commentID
+			pendingCommentsRef.child(newCommentRef).set(toFirebaseComment)
+	
+			if (globalThis.reloadReady) {
+				location.href = `/blog/?post=${globalThis.currentPage}#comment-${newComment.commentID}`;
+				location.reload()
+			} else {
+				globalThis.reloadReady = true
+			}
+		})
+	}
 
 	var pendingComments = {};
 	try {
@@ -475,8 +503,12 @@ function submitComment(depth) {
 
 	localStorage.pendingComments = JSON.stringify(pendingComments);
 
-	location.href = `/blog/?post=${globalThis.currentPage}#comment-${newComment.commentID}`;
-	location.reload();
+	if (globalThis.reloadReady) {
+		location.href = `/blog/?post=${globalThis.currentPage}#comment-${newComment.commentID}`;
+		location.reload()
+	} else {
+		globalThis.reloadReady = true
+	}
 }
 
 async function init() {
