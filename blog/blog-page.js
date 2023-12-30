@@ -476,7 +476,7 @@ function submitComment(depth) {
 			const pendingCommentsRef = firebaseDatabase.ref("pendingComments")
 			
 			var newCommentRef = firebaseComment.postID + "-" + firebaseComment.commentID
-			pendingCommentsRef.child(newCommentRef).set(toFirebaseComment)
+			pendingCommentsRef.child(newCommentRef).set(firebaseComment)
 	
 			if (globalThis.reloadReady) {
 				location.href = `/blog/?post=${globalThis.currentPage}#comment-${newComment.commentID}`;
