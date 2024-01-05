@@ -482,6 +482,7 @@ function submitComment(depth) {
 			firebase.auth().signInWithEmailAndPassword(document.getElementById("email").value, document.getElementById("email").value.split("@")[0]).then((userObj) => {
 				pushCommentToFirebase(userObj)
 			}).catch(error => {
+				console.error("An error occured! Code:" + error)
 				if (error.code == "auth/user-not-found") {
 					firebase.auth().createUserWithEmailAndPassword(document.getElementById("email").value, document.getElementById("email").value.split("@")[0]).then((userObj) => {
 						pushCommentToFirebase(userObj)
@@ -516,6 +517,7 @@ function submitComment(depth) {
 }
 
 function pushCommentToFirebase(userObj) {
+	console.log("Signed in!")
 	const userUID = userObj.uid
 	const firebaseDatabase = firebase.database();
 	const pendingCommentsRef = firebaseDatabase.ref("pendingComments")
