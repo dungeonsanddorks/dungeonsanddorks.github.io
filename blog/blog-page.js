@@ -520,7 +520,7 @@ function submitComment(depth) {
 
 function pushCommentToFirebase(userObj) {
 	console.log("Signed in!")
-	const userUID = userObj.uid
+	const userUID = userObj.user.uid
 	const firebaseDatabase = firebase.database();
 	const pendingCommentsRef = firebaseDatabase.ref("pendingComments")
 	
