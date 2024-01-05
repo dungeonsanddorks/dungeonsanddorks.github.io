@@ -163,7 +163,7 @@ function checkForComments(post) {
 	);
 	globalThis.lastCommentID = totalComments.sort((a, b) => {
 		return b.commentID - a.commentID;
-	})[0].commentID;
+	})[0]?.commentID || 0;
 	var isPural = totalComments.length > 1 ? "s" : "";
 	var topComments = globalThis.comments.filter(
 		(obj) => obj.postID == post.id && obj.depth == 1
@@ -429,6 +429,13 @@ function renderCommentBox() {
 }
 
 function submitComment(depth) {
+	if (document.getElementById("author").value == "") {
+		document.getElementById("author").value = '<span style="color:red">Name is required*</span>'
+		return
+	}	else if (document.getElementById("email").value == "") {
+		document.getElementById("email").value = '<span style="color:red">Email is required*</span>'
+		return
+	}
 	globalThis.reloadReady = false;
 
 	console.log('Ran "submitComment()"');
@@ -472,18 +479,15 @@ function submitComment(depth) {
 			}
 			firebase.initializeApp(firebaseConfig);
 			
-			const firebaseDatabase = firebase.database();
-			const pendingCommentsRef = firebaseDatabase.ref("pendingComments")
-			
-			var newCommentRef = firebaseComment.postID + "-" + firebaseComment.commentID
-			pendingCommentsRef.child(newCommentRef).set(firebaseComment)
-	
-			if (globalThis.reloadReady) {
-				location.href = `/blog/?post=${globalThis.currentPage}#comment-${newComment.commentID}`;
-				location.reload()
-			} else {
-				globalThis.reloadReady = true
-			}
+			firebase.auth().signInWithEmailAndPassword(document.getElementById("email").value, document.getElementById("email").value.split("@")[0]).then((userObj) => {
+				pushCommentToFirebase(userObj)
+			}).catch(error => {
+				if (error.code == "auth/user-not-found") {
+					firebase.auth().createUserWithEmailAndPassword(document.getElementById("email").value, document.getElementById("email").value.split("@")[0]).then((userObj) => {
+						pushCommentToFirebase(userObj)
+					})
+				}
+			})
 		})
 	}
 
@@ -502,6 +506,22 @@ function submitComment(depth) {
 	pendingComments.push(newComment);
 
 	localStorage.pendingComments = JSON.stringify(pendingComments);
+
+	if (globalThis.reloadReady) {
+		location.href = `/blog/?post=${globalThis.currentPage}#comment-${newComment.commentID}`;
+		location.reload()
+	} else {
+		globalThis.reloadReady = true
+	}
+}
+
+function pushCommentToFirebase(userObj) {
+	const userUID = userObj.uid
+	const firebaseDatabase = firebase.database();
+	const pendingCommentsRef = firebaseDatabase.ref("pendingComments")
+	
+	// var newCommentRef = firebaseComment.postID + "-" + firebaseComment.commentID
+	pendingCommentsRef.child(userUID).push(firebaseComment)
 
 	if (globalThis.reloadReady) {
 		location.href = `/blog/?post=${globalThis.currentPage}#comment-${newComment.commentID}`;
