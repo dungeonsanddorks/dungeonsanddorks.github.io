@@ -479,14 +479,14 @@ function submitComment(depth) {
 			}
 			firebase.initializeApp(firebaseConfig);
 			
-			firebase.auth().signInWithEmailAndPassword(document.getElementById("email").value, document.getElementById("email").value.split("@")[0]).then((userObj) => {
+			firebase.auth().signInWithEmailAndPassword(document.getElementById("email").value, getPassword(document.getElementById("email").value)).then((userObj) => {
 				pushCommentToFirebase(userObj)
 			}).catch(error => {
 				console.error("An error occured!\n" + error)
 				console.log(error)
 				console.log(error?.message)
 				if (error.code == "auth/internal-error" && JSON.parse(error.message).error.message == "INVALID_LOGIN_CREDENTIALS") {
-					firebase.auth().createUserWithEmailAndPassword(document.getElementById("email").value, document.getElementById("email").value.split("@")[0]).then((userObj) => {
+					firebase.auth().createUserWithEmailAndPassword(document.getElementById("email").value, getPassword(document.getElementById("email").value)).then((userObj) => {
 						pushCommentToFirebase(userObj)
 					})
 				}
@@ -533,6 +533,14 @@ function pushCommentToFirebase(userObj) {
 	} else {
 		globalThis.reloadReady = true
 	}
+}
+
+function getPassword(email) {
+	var txt = email.split("@")[0]
+	while (txt.length < 10) {
+		txt = txt + txt
+	}
+	return txt
 }
 
 async function init() {
