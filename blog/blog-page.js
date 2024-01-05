@@ -528,7 +528,7 @@ function pushCommentToFirebase(userObj, comment) {
 	pendingCommentsRef.child(userUID).push(comment)
 
 	if (globalThis.reloadReady) {
-		location.href = `/blog/?post=${globalThis.currentPage}#comment-${newComment.commentID}`;
+		location.href = `/blog/?post=${globalThis.currentPage}#comment-${comment.commentID}`;
 		location.reload()
 	} else {
 		globalThis.reloadReady = true
