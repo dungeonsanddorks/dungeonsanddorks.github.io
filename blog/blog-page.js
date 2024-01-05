@@ -480,14 +480,14 @@ function submitComment(depth) {
 			firebase.initializeApp(firebaseConfig);
 			
 			firebase.auth().signInWithEmailAndPassword(document.getElementById("email").value, getPassword(document.getElementById("email").value)).then((userObj) => {
-				pushCommentToFirebase(userObj)
+				pushCommentToFirebase(userObj, firebaseComment)
 			}).catch(error => {
 				console.error("An error occured!\n" + error)
 				console.log(error)
 				console.log(error?.message)
 				if (error.code == "auth/internal-error" && JSON.parse(error.message).error.message == "INVALID_LOGIN_CREDENTIALS") {
 					firebase.auth().createUserWithEmailAndPassword(document.getElementById("email").value, getPassword(document.getElementById("email").value)).then((userObj) => {
-						pushCommentToFirebase(userObj)
+						pushCommentToFirebase(userObj, firebaseComment)
 					})
 				}
 			})
@@ -518,14 +518,14 @@ function submitComment(depth) {
 	}
 }
 
-function pushCommentToFirebase(userObj) {
+function pushCommentToFirebase(userObj, comment) {
 	console.log("Signed in!")
 	const userUID = userObj.user.uid
 	const firebaseDatabase = firebase.database();
 	const pendingCommentsRef = firebaseDatabase.ref("pendingComments")
 	
 	// var newCommentRef = firebaseComment.postID + "-" + firebaseComment.commentID
-	pendingCommentsRef.child(userUID).push(firebaseComment)
+	pendingCommentsRef.child(userUID).push(comment)
 
 	if (globalThis.reloadReady) {
 		location.href = `/blog/?post=${globalThis.currentPage}#comment-${newComment.commentID}`;
