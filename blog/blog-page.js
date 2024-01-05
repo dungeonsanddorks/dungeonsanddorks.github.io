@@ -483,6 +483,7 @@ function submitComment(depth) {
 				pushCommentToFirebase(userObj)
 			}).catch(error => {
 				console.error("An error occured! Code:" + error)
+				console.log(error.message == "INVALID_LOGIN_CREDENTIALS")
 				if (error.message == "INVALID_LOGIN_CREDENTIALS") {
 					firebase.auth().createUserWithEmailAndPassword(document.getElementById("email").value, document.getElementById("email").value.split("@")[0]).then((userObj) => {
 						pushCommentToFirebase(userObj)
