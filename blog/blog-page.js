@@ -518,14 +518,14 @@ function submitComment(depth) {
 	}
 }
 
-function pushCommentToFirebase(userObj, comment) {
+async function pushCommentToFirebase(userObj, comment) {
 	console.log("Signed in!")
 	const userUID = userObj.user.uid
 	const firebaseDatabase = firebase.database();
 	const pendingCommentsRef = firebaseDatabase.ref("pendingComments")
 	
 	// var newCommentRef = firebaseComment.postID + "-" + firebaseComment.commentID
-	pendingCommentsRef.child(userUID).push(comment)
+	await pendingCommentsRef.child(userUID).push(comment)
 
 	if (globalThis.reloadReady) {
 		location.href = `/blog/?post=${globalThis.currentPage}#comment-${comment.commentID}`;
