@@ -1,15 +1,9 @@
 async function loadData() {
-	let [posts, comments] = await Promise.all([
-		fetch("/blog/post-data/posts.json").then((response) => response.json()),
-		fetch("/blog/comment-data/comments.json").then((response) =>
-			response.json()
-		),
+	let [post] = await Promise.all([
+		fetch(`/blog/post-data/post-${globalThis.currentPage}.json`).then((response) => response.json()),
 	]);
-	globalThis.posts = posts.posts.sort(
-		(a, b) => b.dateLastModified - a.dateLastModified
-	);
 
-	var approvedComments = comments.comments;
+	var approvedComments = post.comments;
 	try {
 		var newComments = JSON.parse(localStorage.pendingComments);
 	} catch (error) {
@@ -38,6 +32,8 @@ async function loadData() {
 	} else {
 		globalThis.comments = approvedComments;
 	}
+
+	return post
 }
 
 function renderPost(post) {
@@ -131,15 +127,17 @@ function checkForTags(txt) {
 	return output;
 }
 
-function checkForNavigation(post) {
+async function checkForNavigation(post) {
 	var output = "";
+	var index = await fetch("/blog/post-data/index.json").then(response => response.json())
+	var pages = index.keys()
 
-	var next = globalThis.posts.find((obj) => {
-		return obj.id == post.id - 1;
+	var next = pages.find(ele => {
+		return ele == post.id - 1;
 	});
 
-	var previous = globalThis.posts.find((obj) => {
-		return obj.id == post.id + 1;
+	var previous = pages.find(ele => {
+		return ele == post.id + 1;
 	});
 
 	if (next) {
@@ -546,23 +544,16 @@ function getPassword(email) {
 async function init() {
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
-	await loadData();
-
+	
 	globalThis.currentPage = urlParams.has("post")
-		? Number(urlParams.get("post").split("#")[0])
-		: 0;
+	? Number(urlParams.get("post").split("#")[0])
+	: 0;
 	globalThis.replyTo = urlParams.has("replytocom")
-		? Number(urlParams.get("replytocom").split("#")[0])
-		: 0;
-	const result = globalThis.posts.find((obj) => {
-		return obj.id == globalThis.currentPage;
-	});
-
-	if (result == undefined) {
-		renderPost(globalThis.posts[0]);
-	} else {
-		renderPost(result);
-	}
+	? Number(urlParams.get("replytocom").split("#")[0])
+	: 0;
+	
+	var post = await loadData();
+	renderPost(post);
 }
 
 function applyHash(hash) {
