@@ -1,6 +1,6 @@
 async function loadData() {
 	let [post] = await Promise.all([
-		fetch(`/blog/post-data/post-${globalThis.currentPage}.json`).then((response) => response.json()),
+		fetch(`/blog/post-data/posts/post-${globalThis.currentPage}.json`).then((response) => response.json()),
 	]);
 
 	var approvedComments = post.comments;

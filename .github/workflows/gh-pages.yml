@@ -22,9 +22,24 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  Generate-Index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Remove Old Index
+        run: |
+          cd ./blog/post-data
+          rm -rf index.json
+      - name: Create Index
+        run: |
+          git update-index --chmod=+x ./.github/createIndex.sh
+          bash ./.github/createIndex.sh
+
   # Build job
   build:
     runs-on: ubuntu-latest
+    needs: Generate-Index
     steps:
       - name: Checkout
         uses: actions/checkout@v3
