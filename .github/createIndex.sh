@@ -1,10 +1,10 @@
 #!/bin/bash
 
-cd ./blog/post-data
+echo "{" >> ./blog/post-data/index.json;
 
-dir="/posts"
-for f in "$dir"/*; do
-  echo "$f"
-done
+for f in ./blog/post-data/posts/*; do [[ -f "$f" ]] && echo "\"${f##./}\": true
+," | sed 's/blog\/post-data\/posts\/post-//' | sed 's/.json//' >> ./blog/post-data/index.json; done
 
-echo "" > "index.json"
+sed -i '$d' ./blog/post-data/index.json
+echo "}" >> ./blog/post-data/index.json;
+
