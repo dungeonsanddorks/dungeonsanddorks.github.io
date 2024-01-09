@@ -30,7 +30,7 @@ jobs:
       - name: Remove Old Index
         run: |
           cd ./blog/post-data
-          rm -rf index.json
+          rm index.json
       - name: Create Index
         run: |
           git update-index --chmod=+x ./.github/createIndex.sh
