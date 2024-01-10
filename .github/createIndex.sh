@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm ./blog/post-data/index.json
+
 echo "{" >> ./blog/post-data/index.json;
 
 for f in ./blog/post-data/posts/*; do [[ -f "$f" ]] && echo "\"${f##./}\": true

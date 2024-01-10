@@ -1,9 +1,11 @@
 async function loadData() {
-	let [post] = await Promise.all([
+	let [post, index] = await Promise.all([
 		fetch(`/blog/post-data/posts/post-${globalThis.currentPage}.json`).then((response) => response.json()),
+		fetch(`/blog/post-data/index.json`).then((response) => response.json()),
 	]);
+	globalThis.postIndex = index
 
-	var approvedComments = post.comments;
+	var approvedComments = post.comments || [];
 	try {
 		var newComments = JSON.parse(localStorage.pendingComments);
 	} catch (error) {
@@ -127,28 +129,29 @@ function checkForTags(txt) {
 	return output;
 }
 
-async function checkForNavigation(post) {
+function checkForNavigation(post) {
 	var output = "";
-	var index = await fetch("/blog/post-data/index.json").then(response => response.json())
-	var pages = index.keys()
+	var pages = Object.keys(globalThis.postIndex)
+	pages.sort((a, b) => {
+		return Number(a) - Number(b)
+	})
 
-	var next = pages.find(ele => {
-		return ele == post.id - 1;
-	});
+	console.log(pages)
+	let id = post.id
+	if (post.id.length == 1) id = '0' + post.id.toString()
+	console.log(id)
+	var currentIndex = pages.indexOf(id.toString())
+	console.log(currentIndex)
 
-	var previous = pages.find(ele => {
-		return ele == post.id + 1;
-	});
-
-	if (next) {
+	if (pages[currentIndex - 1]) {
 		output += `<div class="nav-previous"><a href="https://dungeonsanddorks.github.io/blog/?post=${
-			post.id - 1
+			Number(pages[currentIndex - 1])
 		}" rel="prev"><span class="ast-left-arrow">←</span> Previous Post</a></div>`;
 	}
 
-	if (previous) {
+	if (pages[currentIndex + 1]) {
 		output += `<div class="nav-next"><a href="https://dungeonsanddorks.github.io/blog/?post=${
-			post.id + 1
+			Number(pages[currentIndex + 1])
 		}" rel="next">Next Post <span class="ast-right-arrow">→</span></a></div>`;
 	}
 

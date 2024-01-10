@@ -1,20 +1,42 @@
 class Blog {
   async initBlogPage() {
-    await this.loadPosts();
+    this.postIndex = await fetch("/blog/post-data/index.json").then((response) =>
+      response.json()
+    );
     this.setUpBlogPageList();
   }
 
-  async loadPosts() {
-    this.postData = await fetch("/blog/post-data/posts.json").then((response) =>
-      response.json()
-    );
-    this.posts = this.postData.posts;
-    this.posts.sort((a, b) => b.dateLastModified - a.dateLastModified);
+  async loadPosts(arrToLoad) {
+    return await Promise.all(arrToLoad.map(id => fetch(`/blog/post-data/posts/post-${id}.json`).then(response => response.json())))
   }
 
-  setUpBlogPageList() {
+  async setUpBlogPageList() {
     this.output = "";
     if (document.getElementsByClassName("uc_post_list")?.length > 0) {
+      this.pages = Object.keys(this.postIndex)
+      this.pages.sort((a, b) => {
+        return Number(b) - Number(a)
+      })
+
+      const numPerPage = 11 // This can be changed to whatever seems appropriate
+
+      const queryString = window.location.search;
+	    const urlParams = new URLSearchParams(queryString);
+      const blogPageNum = urlParams.has("page")
+        ? Number(urlParams.get("page").split("#")[0])
+        : 1;
+
+      // TODO: Add page navigation to the bottom of the page
+
+      let toLoad = []
+      for (let i = 0; i < numPerPage; i++) {
+        if (this.pages[i + numPerPage * (blogPageNum - 1)]) {
+          toLoad.push(this.pages[i + numPerPage * (blogPageNum - 1)])
+        }
+      }
+
+      this.posts = await this.loadPosts(toLoad);
+      
       this.posts.forEach((post) => {
         let date = new Date(post.dateLastModified * 1000);
         this.output += `<div class="uc_post_list_box">
@@ -55,9 +77,15 @@ class Blog {
       document.getElementsByClassName("uc_post_list")[0].innerHTML +=
         this.output;
     } else if (document.getElementsByClassName("ue_post_blocks")?.length > 0) {
-      var runFor = this.posts.length < 6 ? this.posts.length : 6;
-      for (var i = 0; i < runFor; i++) {
-        let post = this.posts[i];
+      this.pages = Object.keys(this.postIndex)
+      this.pages.sort((a, b) => {
+        return Number(b) - Number(a)
+      })
+
+      let posts = await this.loadPosts([this.pages[0], this.pages[1], this.pages[2], this.pages[3], this.pages[4], this.pages[5]]);
+
+      for (var i = 0; i < 6; i++) {
+        let post = posts[i];
         this.output += `<div class="ue_post_blocks_box">
 <div class="ue_post_blocks_image">
 			<a href="https://dungeonsanddorks.github.io/blog/?post=${post.id}" style="display:block;">
