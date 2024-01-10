@@ -1,6 +1,6 @@
 async function loadData() {
 	let [post, index] = await Promise.all([
-		fetch(`/blog/post-data/posts/post-${globalThis.currentPage}.json`).then((response) => response.json()),
+		fetch(`/blog/post-data/posts/post-${padNumber(globalThis.currentPage, 2)}.json`).then((response) => response.json()),
 		fetch(`/blog/post-data/index.json`).then((response) => response.json()),
 	]);
 	globalThis.postIndex = index
@@ -136,12 +136,7 @@ function checkForNavigation(post) {
 		return Number(a) - Number(b)
 	})
 
-	console.log(pages)
-	let id = post.id
-	if (post.id.length == 1) id = '0' + post.id.toString()
-	console.log(id)
-	var currentIndex = pages.indexOf(id.toString())
-	console.log(currentIndex)
+	var currentIndex = pages.indexOf(padNumber(post.id, 2))
 
 	if (pages[currentIndex - 1]) {
 		output += `<div class="nav-previous"><a href="https://dungeonsanddorks.github.io/blog/?post=${
@@ -563,6 +558,15 @@ function applyHash(hash) {
 	window.location.hash = ""
 	console.log("Applying Hash: " + hash)
 	window.location.hash = hash
+}
+
+function padNumber(num, toLength) {
+	let zeros = ""
+	for (let i = 0; i < toLength; i++) {
+		zeros += "0"
+	}
+
+	return ( zeros + num.toString() ).slice(0 - toLength);
 }
 
 init();
