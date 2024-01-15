@@ -522,6 +522,7 @@ async function pushCommentToFirebase(userObj, comment) {
 	
 	// var newCommentRef = firebaseComment.postID + "-" + firebaseComment.commentID
 	await pendingCommentsRef.child(userUID).push(comment)
+	firebase.auth().signOut()
 
 	if (globalThis.reloadReady) {
 		location.href = `/blog/?post=${globalThis.currentPage}#comment-${comment.commentID}`;

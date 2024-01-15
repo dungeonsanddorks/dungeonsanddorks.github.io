@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<title>dungeonsanddorks - Admin Login</title>
+<link
+  rel="stylesheet"
+  id="google-fonts-1-css"
+  href="https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CBangers%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&amp;display=swap&amp;ver=6.4.1"
+  media="all"
+/>
+<link
+  rel="stylesheet"
+  id="astra-google-fonts-css"
+  href="https://fonts.googleapis.com/css?family=Noto+Sans%3A400%2C700%7CMontserrat%3A700&amp;display=fallback&amp;ver=4.3.1"
+  media="all"
+/>
+
+<div id="container">
+  <div id="main">
+    <h1 id="title">ADMIN LOGIN</h1><br>
+
+    <input type="text" id="usernameInput" class="formInput" placeholder="Username"><br>
+    <br>
+    <input type="password" id="passwordInput" class="formInput" placeholder="Password"><br>
+    <br>
+    <button id="loginButton" onclick="login()">Sign In</button>
+  </div>
+</div>
+
+<style>
+  #container {
+    height: 100%;
+    width: 100%;
+  }
+
+  #main {
+    margin: auto;
+    width: 50%;
+    padding-top: 10%;
+    text-align: center;
+    font-family: "Bangers", sans-serif;
+  }
+
+  #title {
+    font-size: 6vw;
+    margin-bottom: 0px;
+  }
+
+  #loginButton {
+    background-color: rgb(27, 174, 112);
+    border-color: rgb(27, 174, 112);
+    border-radius: 25px;
+    border-style: solid;
+    color: white;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    transition: background-color 0.5s, border-color 0.5s, color 0.5s;
+    height: 50px;
+    width: 50%;
+  }
+
+  #loginButton:hover {
+    background-color: rgb(15, 110, 70);
+    border-color: rgb(15, 110, 70);
+    color: rgb(230, 230, 230);
+  }
+
+  .formInput {
+    background-color: rgb(200, 200, 200);
+    border-color: rgb(200, 200, 200);
+    border-radius: 25px;
+    border-style: solid;
+    color: black;
+    font-size: 25px;
+    height: 50px;
+    text-align: center;
+    width: 50%;
+  }
+
+  .formInput::placeholder {
+    color: rgb(80, 80, 80);
+  }
+</style>
+<script src="login.js"></script>
