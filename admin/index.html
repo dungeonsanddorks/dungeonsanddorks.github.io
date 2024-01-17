@@ -1,6 +1,63 @@
 <!DOCTYPE html>
 <title>Dungeons and Dorks Admin</title>
 
-<h1>This is the Admin Page</h1>
+<div id="container">
+  
+  <div id="sidebar">
+    <h1 style="text-align: center;">Dungeons<br>and Dorks<br>Admin Page</h1>
+    
+    <div class="sidebar-button">
+      <p>Approve Comments</p>
+    </div>
+
+    <div class="sidebar-button">
+      <p>Create Blog Posts</p>
+    </div>
+
+    <div class="sidebar-button">
+      <p>Generate Post Data</p>
+    </div>
+
+    <button class="sidebar-button" id="signOutButton" onclick="firebase.auth().signOut()">Sign Out</button>
+  </div>
+  <div id="main"></div>
+</div>
+
+<style>
+  body {
+    margin: 0;
+  }
+
+  #container {
+    display: flex
+  }
+
+  #sidebar {
+    background-color: grey;
+    width: 200px;
+    position: fixed;
+    height: 100%;
+  }
+
+  #main {
+    flex-grow: 1;
+    background-color: lightgray;
+  }
+
+  .sidebar-button {
+    box-sizing: border-box;
+    width: 160px;
+    margin: 20px;
+    padding: 5px;
+    background-color: lightgray;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  #signOutButton {
+    position: absolute;
+    bottom: 0;
+  }
+</style>
 
 <script src="admin.js"></script>

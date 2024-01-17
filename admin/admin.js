@@ -19,6 +19,8 @@ addElement('script', {
     } 
     firebase.initializeApp(firebaseConfig);
 
+    if (localStorage.lastSignedIn + 3600000 < Date.now()) firebase.auth().signOut()
+
     firebase.auth().onAuthStateChanged(function(userObj) {
       if (!userObj) {
         window.location.href = '/admin/login/';  
@@ -27,14 +29,20 @@ addElement('script', {
         const userUID = userObj.uid
 
         const db = firebase.database()
-        const accessSnap = db.ref('accessLevel/' + userUID).once('value', data => {
-          if (data.val().level !== 'admin') {
+        db.ref('userData/' + userUID).once('value', data => {
+          if (data.val().level !== 'admin' && data.val().level !== 'owner') {
             window.location.href = '/admin/login/';
+          } else {
+            initPage(data.val())
           }
         })
-    
-        // Page Setup here
       }
     })
   })
+}
+
+async function initPage(userData) {
+  signOutButton.innerHTML += "<br>" + userData.username
+  
+  // Page Setup here
 }
