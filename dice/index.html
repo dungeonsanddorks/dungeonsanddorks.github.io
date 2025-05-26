@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-CA" prefix="og: https://ogp.me/ns#">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="profile" href="https://gmpg.org/xfn/11" />
+    <title>Home - dungeons and dragons blog</title>
+    <meta
+      name="description"
+      content="Your hub for all things Dungeons and Dragons (D&amp;D): lore, character tips, campaigns, and more. Join our community of adventures today!"
+    />
+    <meta name="robots" content="max-image-preview:large" />
+    <link rel="canonical" href="https://dungeonsanddorks.github.io/" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="dungeons and dragons blog -" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Home - dungeons and dragons blog" />
+    <meta
+      property="og:description"
+      content="Your hub for all things Dungeons and Dragons (D&amp;D): lore, character tips, campaigns, and more. Join our community of adventures today!"
+    />
+    <meta property="og:url" content="https://dungeonsanddorks.github.io/" />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/assets/2023/10/73eJ2f-LogoMakr.png"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/assets/2023/10/73eJ2f-LogoMakr.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Home - dungeons and dragons blog" />
+    <meta
+      name="twitter:description"
+      content="Your hub for all things Dungeons and Dragons (D&amp;D): lore, character tips, campaigns, and more. Join our community of adventures today!"
+    />
+    <meta
+      name="twitter:image"
+      content="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/assets/2023/10/73eJ2f-LogoMakr.png"
+    />
+
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="dungeons and dragons blog » Feed"
+      href="https://dungeonsanddorks.github.io/feed/"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="dungeons and dragons blog » Comments Feed"
+      href="https://dungeonsanddorks.github.io/comments/feed/"
+    />
+
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/dice.css"/>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="/assets/2023/10/73eJ2f-LogoMakr.png" alt="Dungeons and Dorks Logo" />
+          <span>Dungeons and Dorks</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="/index.html">HOME</a></li>
+          <li><a href="/blog/index.html">BLOG</a></li>
+          <li><a href="/about/index.html">ABOUT</a></li>
+          <li><a href="/contact/index.html">CONTACT</a></li>
+          <li><a href="/dice/index.html">DICE</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="dice-bg">
+      <div class="dice-container">
+        <h4>Number of Dice</h4>
+        <input type="number" class="text" id="diceCount" value="1" min="1" max="100" step="1" />
+        <h4>Dice Type</h4>
+        <select class="text" id="diceType">
+          <option value="d4">d4</option>
+          <option value="d6">d6</option>
+          <option value="d8">d8</option>
+          <option value="d10">d10</option>
+          <option value="d12">d12</option>
+          <option value="d20">d20</option>
+          <option value="d100">d100</option>
+        </select>
+        <h4>Modifer</h4>
+        <input type="number" class="text" id="modifier" value="0" step="1"/>
+        <p>Display all rolls? <input type="checkbox" id="showAllRolls" /></p>
+        <button class="dice-button" id="rollButton">Roll</button>
+        <div id="resultContainer">
+          <p>Result:<br>
+            <span id="result"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <main class="landing-content">
+      <p>Our virtual dice roller, meticulously designed for tabletop RPG enthusiasts, including Dungeons & Dragons players, offers a seamless and immersive gaming experience. With a user-friendly interface, it empowers both players and Game Masters to effortlessly roll a wide array of polyhedral dice, from d4 to d20, all within a few clicks. Customize your rolls, simulate complex scenarios, and embrace the thrill of chance with our 3D-rendered dice. Whether you’re delving into epic quests or orchestrating intense encounters, this tool is your reliable companion. It’s free, accessible online, and the ideal companion for enhancing your role-playing adventures. Elevate your tabletop gaming with precision and style using our dice generator.</p>
+    </main>
+
+    <footer>
+      <nav class="navbar footer">
+        <div class="logo">
+          <img src="/assets/2023/10/73eJ2f-LogoMakr.png" alt="Dungeons and Dorks Logo" />
+          <span>Dungeons and Dorks</span>
+        </div>
+
+        <p class="copyright">&copy; 2023 Dungeons and Dorks. All rights reserved.</p>
+
+        <ul class="nav-links">
+          <li><a href="/pravacy-policy/index.html">Privacy Policy</a></li>
+          <li><a href="/terms/index.html">Terms and Conditions</a></li>
+        </ul>
+      </nav>
+    </footer>
+
+    <script src="/dice/dice.js"></script>
+  </body>
+</html>

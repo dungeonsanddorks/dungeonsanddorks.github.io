@@ -6,21 +6,31 @@
   <div id="sidebar">
     <h1 style="text-align: center;">Dungeons<br>and Dorks<br>Admin Page</h1>
     
-    <div class="sidebar-button">
+    <div class="sidebar-button" data-pageID="newComments" onclick="switchToPage(this)">
       <p>Approve Comments</p>
     </div>
 
-    <div class="sidebar-button">
+    <div class="sidebar-button" data-pageID="newPosts" onclick="switchToPage(this)">
       <p>Create Blog Posts</p>
     </div>
 
-    <div class="sidebar-button">
+    <div class="sidebar-button" data-pageID="generateData" onclick="switchToPage(this)">
       <p>Generate Post Data</p>
     </div>
 
-    <button class="sidebar-button" id="signOutButton" onclick="firebase.auth().signOut()">Sign Out</button>
+    <button class="sidebar-button" id="signOutButton" onclick="(function() {firebase.auth().signOut(); localStorage.removeItem('isSignedIn')})()">Sign Out</button>
   </div>
-  <div id="main"></div>
+  <div id="main">
+    <div id="newComments" class="content">
+      <h1>Approve Comments</h1>
+    </div>
+    <div id="newPosts" class="content" style="display: none;">
+      <h1>Create Blog Posts</h1>
+    </div>
+    <div id="generateData" class="content" style="display: none;">
+      <h1>Generate Post Data</h1>
+    </div>
+  </div>
 </div>
 
 <style>
@@ -29,7 +39,7 @@
   }
 
   #container {
-    display: flex
+    display: flex;
   }
 
   #sidebar {
@@ -40,8 +50,14 @@
   }
 
   #main {
-    flex-grow: 1;
+    flex: 1;
     background-color: lightgray;
+    padding-left: 10px;
+    position: fixed;
+    left: 200px;
+    right: 0;
+    top: 0;
+    bottom: 0;
   }
 
   .sidebar-button {
@@ -52,11 +68,17 @@
     background-color: lightgray;
     border-radius: 5px;
     text-align: center;
+    transition: background-color 0.25s;
+  }
+
+  .sidebar-button:hover {
+    background-color: rgb(163, 163, 163);
   }
 
   #signOutButton {
     position: absolute;
     bottom: 0;
+    border: none
   }
 </style>
 

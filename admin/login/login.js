@@ -29,6 +29,7 @@ function login() {
 
   firebase.auth().signInWithEmailAndPassword(email, password).then(userObj => {
     localStorage.lastSignIn = Date.now()
+    localStorage.isSignedIn = true
     window.location.href = "/admin/"
   }).catch(error => {
     console.error(error)

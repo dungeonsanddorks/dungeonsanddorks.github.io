@@ -1,0 +1,16 @@
+.blog-bg {
+  background-image: url('/assets/2023/10/portal-4960440_640.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 280px 0 280px 0;
+  position: relative;
+}
+.blog-title {
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 2px 8px #000a;
+}
+.blog-title h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}

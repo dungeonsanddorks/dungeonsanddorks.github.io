@@ -1,0 +1,16 @@
+.about-bg {
+  background-image: url('/assets/2023/10/dice-7854512_640.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 200px 0 200px 0;
+  position: relative;
+}
+.about {
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 2px 8px #000a;
+}
+.about h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}

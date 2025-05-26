@@ -1,0 +1,43 @@
+.dice-bg {
+  background-image: url('/assets/2023/10/dice-7854512_640.jpg');
+  background-size: contain;
+  background-position: center;
+  padding: 150px 0 150px 0;
+  position: relative;
+}
+
+.dice-container {
+  display: block;
+  background-color: #fff;
+  width: 400px;
+  text-align: center;
+  color: #222;
+  padding: 15px 0;
+  margin: 0 auto;
+}
+
+.dice-container h4 {
+  margin-bottom: 5px;
+}
+
+.dice-container .text {
+  width: 100px;
+  text-align: center;
+}
+
+.dice-button {
+  background: var(--main-color);
+  color: #222;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 8px #0004;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+.dice-button:hover {
+  background: var(--main-color-button-hover);
+}

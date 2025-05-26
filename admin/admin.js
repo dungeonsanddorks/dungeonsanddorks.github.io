@@ -1,3 +1,5 @@
+if (!localStorage.isSignedIn) window.location.href = '/admin/login/';
+
 function addElement(type, params) {
   var newElement = document.createElement(type)
   var keys = Object.keys(params)
@@ -19,7 +21,10 @@ addElement('script', {
     } 
     firebase.initializeApp(firebaseConfig);
 
-    if (localStorage.lastSignedIn + 3600000 < Date.now()) firebase.auth().signOut()
+    if (localStorage.lastSignedIn + 3600000 < Date.now()) {
+      firebase.auth().signOut();
+      localStorage.removeItem('isSignedIn')
+    }
 
     firebase.auth().onAuthStateChanged(function(userObj) {
       if (!userObj) {
@@ -30,10 +35,11 @@ addElement('script', {
 
         const db = firebase.database()
         db.ref('userData/' + userUID).once('value', data => {
-          if (data.val().level !== 'admin' && data.val().level !== 'owner') {
+          var userData = data.val()
+          if (userData.level !== 'admin' && userData.level !== 'owner') {
             window.location.href = '/admin/login/';
           } else {
-            initPage(data.val())
+            initPage(userData)
           }
         })
       }
@@ -45,4 +51,9 @@ async function initPage(userData) {
   signOutButton.innerHTML += "<br>" + userData.username
   
   // Page Setup here
+}
+
+function switchToPage(element) {
+  document.querySelectorAll(".content").forEach(ele => ele.style.display = "none")
+  document.querySelectorAll("#" + element.dataset.pageid).forEach(ele => ele.style.display = "flex")
 }
