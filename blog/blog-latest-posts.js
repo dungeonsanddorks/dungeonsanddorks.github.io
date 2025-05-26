@@ -89,7 +89,7 @@ class LastestBlogPosts {
 			this.posts.forEach((post) => {
 				let date = new Date(post.dateLastModified * 1000);
 				this.output += `<article class="blog-post-card">
-    <img decoding="async" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/post-data/images/${
+    <img decoding="async" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/posts/post-data/images/${
 				post.image
 			}" alt="${post.imageAlt}" width="768" height="576">
     <div class="blog-post-card-content">
@@ -128,7 +128,7 @@ class LastestBlogPosts {
 				let date = new Date(post.dateLastModified * 1000)
 				this.output += `
         <a href="https://dungeonsanddorks.github.io/blog/posts/?post=${post.id}" class="blog-post-menu-item">
-    <img decoding="async" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/post-data/images/${post.image}" alt="${post.imageAlt}" width="768" height="576" class="blog-post-menu-thumb">
+    <img decoding="async" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/posts/post-data/images/${post.image}" alt="${post.imageAlt}" width="768" height="576" class="blog-post-menu-thumb">
     <div class="blog-post-menu-title">${post.title}</div>
     <div class="blog-post-menu-meta">${date.toLocaleString(
 						"default",

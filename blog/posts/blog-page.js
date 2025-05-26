@@ -42,7 +42,7 @@ function renderPost(post) {
 	let date = new Date(post.dateLastModified * 1000);
 	var imageHTML = "";
 	if (post.image !== "placeholder.jpeg")
-		imageHTML = `<img width="1024" height="768" class="blog-post-hero" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/post-data/images/${post.image}" alt="${post.imageAlt}" itemprop="image" decoding="async" sizes="(max-width: 1024px) 100vw, 1024px">`;
+		imageHTML = `<img width="1024" height="768" class="blog-post-hero" src="https://raw.githubusercontent.com/dungeonsanddorks/dungeonsanddorks.github.io/main/blog/posts/post-data/images/${post.image}" alt="${post.imageAlt}" itemprop="image" decoding="async" sizes="(max-width: 1024px) 100vw, 1024px">`;
 	var output =
 		`<h1 class="blog-post-title">${post.title}</h1>
 	<div class="blog-post-meta">
